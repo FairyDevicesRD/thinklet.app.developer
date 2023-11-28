@@ -1,0 +1,167 @@
+---
+tags:
+  - THINKLET
+  - Android
+  - KeyConfig
+---
+
+# キーコンフィグ
+ここでは、THINKLETのLauncherアプリのキーコンフィグの設定について説明しています。  
+キーコンフィグは、THINKLETのLauncherアプリに実装された機能です。  
+Launcherがフォアグラウンドで表示されているときに機能し、ボタン操作だけで、アプリの起動ができます。  
+キーコンフィグでは、アプリの起動に用いる、`Intent`に渡す`packageName`, `className` 以外で、`extras`, `flags`, `action` を設定できます。
+
+例えば、Androidのアプリから、次のように別のアプリを起動するような実装 (Kotlin) があるとします。
+
+```kotlin
+context.startActivity(Intent().apply {
+    setClassName("com.example.fd.test", "com.example.fd.test.MainActivity")
+    action = "com.example.fd.test.ACTION_TEST"
+    putExtra("str", "AAA")
+    putExtra("num", 1920)
+    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+})
+```
+
+同様条件でTHINKLETのボタン操作から、アプリを起動するには、次のように指定します。  
+なお、KEYCODE_CAMERAがアサインされたボタンを長押し、それを離したタイミングで設定しています。
+
+```json
+{
+  "key-config": [
+    {
+      "key-name": "center",
+      "key-event": "long-released",
+      "key-action": {
+        "action-type": "launch-app",
+        "action-param": {
+          "package-name": "com.example.fd.test",
+          "class-name": "com.example.fd.test.MainActivity",
+          "action-name": "com.example.fd.test.ACTION_TEST",
+          "extras": [
+            {
+              "key-name": "str",
+              "key-value": "AAA"
+            },
+            {
+              "key-name": "num",
+              "key-type": "int",
+              "key-value": 1920
+            }
+          ],
+          "flags": [
+            "FLAG_ACTIVITY_NEW_TASK",
+            "FLAG_ACTIVITY_CLEAR_TASK"
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
+## Key と value 
+Keyとvalueの対応は下記のようになっています。
+
+### トップレベル
+| Key        | Value Type | description                                                                      |
+| ---------- | ---------- | -------------------------------------------------------------------------------- |
+| key-config | JSONArray  | キー・イベントごとのConfig をまとめた JSON Object の配列、フォーマットは下記参照 |
+
+### キー・イベントごとのConfig
+| Key        | Value Type | description                                                                                                                                                                  |
+| ---------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| key-name   | String     | `left` = (1), `center` = (2), `right` = (3) のいずれか.                                                                                                                      |
+| key-event  | String     | `first-pressed`, `single-released`, `double-pressed`, `double-released`, `long-pressed`, `long-released` のいずれか。[※1](#※1キーイベントと実際の動作の対応は下記の通りです) |
+| key-action | JSONObject | キー・イベントに応じたアクションをまとめた JSON Object                                                                                                                       |
+
+![](./img/hw/l.jpg)
+
+#### ※1:キーイベントと実際の動作の対応は下記の通りです
+| key-event       | 実際の動作                                                                                                                    |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| first-pressed   | ボタンが押下された瞬間に発生するイベント                                                                                      |
+| single-released | 二回押し判定の閾値ミリ秒を超え、かつ、長押し判定の閾値ミリ秒を超える前にボタンが離された時に発生するイベント (いわゆる短押し) |
+| double-pressed  | 二回押し判定の閾値ミリ秒を超える前に、２回目のボタンが押された瞬間に発生するイベント（二回押しの押し始め）                    |
+| double-released | double-pressed の判定後、ボタンが離された時に発生するイベント                                                                 |
+| long-pressed    | ボタンが押し続けられた状態で、長押し判定の閾値ミリ秒を超えた瞬間に発生するイベント（いわゆる長押し）                          |
+| long-released   | ボタンが押し続けられた状態のまま長押し判定の閾値ミリ秒を超えた後、ボタンが離された時に発生するイベント                        |
+
+#### ※2: 使用上の注意
+double-pressedやlong-pressedでlaunch-appを指定する場合、起動される側のアプリのonKeyDownイベントのハンドルに注意してください。
+キーが押されたままの状態だと、起動される側のアプリは起動した直後からonKeyDownイベントを拾います。
+この挙動はThinkletLauncher側ではコントロールできないので、起動されるアプリ側で適切にハンドルするようにしてください。
+なお、first-pressedは、launch-appを指定できません。
+したがって、`xxxx-release` を使用することを推奨しています。
+
+
+### キーアクション
+
+| Key          | Value Type | description                                                                    |
+| ------------ | ---------- | ------------------------------------------------------------------------------ |
+| action-type  | String     | アプリ起動の場合は、"launch-app" を指定すること                                |
+| action-param | JSONObject | 起動するアプリのパッケージ名、クラス名、その他パラメータをまとめた JSON Object |
+
+
+### アクションパラメータ
+
+| Key          | Value Type | description                                                                                                             |
+| ------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
+| package-name | String     | 起動するアプリのパッケージ名、ComponentName の第一引数になる                                                            |
+| class-name   | String     | 起動するアプリのクラス名、ComponentName の第二引数になる                                                                |
+| action-name  | String     | startActivity に使われる `Intent` に追加する action 名                                                                  |
+| extras       | JSONArray  | startActivity に使われる `Intent` に追加する extra の値をまとめた JSONObject の配列。詳細は[後述](#extras-パラメータ)。 |
+| flags        | JSONArray  | startActivity に使われる `Intent` に追加する flags の値をまとめた String の配列。詳細は[後述](#flags-パラメータ)。      |
+
+
+### extras パラメータ
+
+| Key       | Value Type            | description                                                                                    |
+| --------- | --------------------- | ---------------------------------------------------------------------------------------------- |
+| key-name  | String                | putExtra / getXxxExtra の name フィールドに指定される key の名前                               |
+| key-type  | `String` または `int` | putExtra / getXxxExtra の value フィールドに指定される値の型。省略した場合は `String` と解釈。 |
+| key-value | String型 または Int型 | key-type で指定した型の value 値。String型と Int型のみ指定可能。                               |
+
+### flags パラメータ
+- `Intent`に設定するFlagを指定できる。
+- 以下が、`Intent.addFlags`に設定するためのエイリアスです。
+
+| Alias                                 | Value                                          |
+| ------------------------------------- | ---------------------------------------------- |
+| FLAG_ACTIVITY_CLEAR_TASK              | `Intent.FLAG_ACTIVITY_CLEAR_TASK`              |
+| FLAG_ACTIVITY_SINGLE_TOP              | `Intent.FLAG_ACTIVITY_SINGLE_TOP`              |
+| FLAG_ACTIVITY_BROUGHT_TO_FRONT        | `Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT`        |
+| FLAG_ACTIVITY_CLEAR_TOP               | `Intent.FLAG_ACTIVITY_CLEAR_TOP`               |
+| FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS    | `Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS`    |
+| FLAG_ACTIVITY_FORWARD_RESULT          | `Intent.FLAG_ACTIVITY_FORWARD_RESULT`          |
+| FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY   | `Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY`   |
+| FLAG_ACTIVITY_MULTIPLE_TASK           | `Intent.FLAG_ACTIVITY_MULTIPLE_TASK`           |
+| FLAG_ACTIVITY_NEW_DOCUMENT            | `Intent.FLAG_ACTIVITY_NEW_DOCUMENT`            |
+| FLAG_ACTIVITY_NEW_TASK                | `Intent.FLAG_ACTIVITY_NEW_TASK`                |
+| FLAG_ACTIVITY_NO_ANIMATION            | `Intent.FLAG_ACTIVITY_NO_ANIMATION`            |
+| FLAG_ACTIVITY_NO_HISTORY              | `Intent.FLAG_ACTIVITY_NO_HISTORY`              |
+| FLAG_ACTIVITY_NO_USER_ACTION          | `Intent.FLAG_ACTIVITY_NO_USER_ACTION`          |
+| FLAG_ACTIVITY_PREVIOUS_IS_TOP         | `Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP`         |
+| FLAG_ACTIVITY_REORDER_TO_FRONT        | `Intent.FLAG_ACTIVITY_REORDER_TO_FRONT`        |
+| FLAG_ACTIVITY_RESET_TASK_IF_NEEDED    | `Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED`    |
+| FLAG_ACTIVITY_RETAIN_IN_RECENTS       | `Intent.FLAG_ACTIVITY_RETAIN_IN_RECENTS`       |
+| FLAG_ACTIVITY_TASK_ON_HOME            | `Intent.FLAG_ACTIVITY_TASK_ON_HOME`            |
+| FLAG_DEBUG_LOG_RESOLUTION             | `Intent.FLAG_DEBUG_LOG_RESOLUTION`             |
+| FLAG_EXCLUDE_STOPPED_PACKAGES         | `Intent.FLAG_EXCLUDE_STOPPED_PACKAGES`         |
+| FLAG_FROM_BACKGROUND                  | `Intent.FLAG_FROM_BACKGROUND`                  |
+| FLAG_GRANT_PERSISTABLE_URI_PERMISSION | `Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION` |
+| FLAG_GRANT_PREFIX_URI_PERMISSION      | `Intent.FLAG_GRANT_PREFIX_URI_PERMISSION`      |
+| FLAG_GRANT_READ_URI_PERMISSION        | `Intent.FLAG_GRANT_READ_URI_PERMISSION`        |
+| FLAG_GRANT_WRITE_URI_PERMISSION       | `Intent.FLAG_GRANT_WRITE_URI_PERMISSION`       |
+| FLAG_INCLUDE_STOPPED_PACKAGES         | `Intent.FLAG_INCLUDE_STOPPED_PACKAGES`         |
+| FLAG_RECEIVER_FOREGROUND              | `Intent.FLAG_RECEIVER_FOREGROUND`              |
+| FLAG_RECEIVER_NO_ABORT                | `Intent.FLAG_RECEIVER_NO_ABORT`                |
+| FLAG_RECEIVER_REGISTERED_ONLY         | `Intent.FLAG_RECEIVER_REGISTERED_ONLY`         |
+| FLAG_RECEIVER_REPLACE_PENDING         | `Intent.FLAG_RECEIVER_REPLACE_PENDING`         |
+
+## key_config.json の格納場所
+`key_config.json` のTHINKLETE上の格納場所は下記の通りです。
+
+```
+/storage/emulated/0/Android/data/ai.fd.thinklet.app.launcher/files/key_config.json
+```
