@@ -21,12 +21,12 @@ THINKLETには画面がありません。
 
 最も簡単な方法は、アプリをインストールする際に、Permissionを許可してInstallする方法です。  
 下記のように、`-g` オプションを付与してインストールすることが、許可された状態でインストールされます。
-```bash
+```
 $ adb install -g xxx.apk
 ```
 
 または、Permissionとパッケージ名を指定して、許可できます。
-```bash
+```
 $ adb shell pm grant <パッケージ名> <Permission名>
 ```
 

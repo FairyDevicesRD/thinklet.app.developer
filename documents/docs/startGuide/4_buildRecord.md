@@ -109,14 +109,14 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
   - scrcpy上でHomeに移動しても構いません。
 - 以下のコマンドを実行してファイルが生成されているかを確認します。  
 mp4ファイルが生成されていれば、録画ができています。
-  ```bash
+  ```
   $ adb shell ls /sdcard/Android/data/com.example.fd.camera/files/
   CameraX-recording-1694083279133.mp4
   ```
 ## 再生
 - 録画したファイルを取り出します。  
 取り出すには次のコマンドを実行します。
-  ```bash
+  ```
   $ adb pull /sdcard/Android/data/com.example.fd.camera/files/CameraX-recording-1694083279133.mp4 /path/to/save_dir/
   ```
 - 視聴するには、汎用の再生ソフトを使用してください。

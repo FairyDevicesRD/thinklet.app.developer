@@ -22,7 +22,6 @@ THINKLETのシステムアップデートには、`adb` 接続が必要です。
 $ adb shell getprop ro.sys.fd.version
 10.000.0
 ```
-`9.001.0` 以前のバージョンでは、アップデート手順が異なります。弊社まで個別にお問い合わせください。
 :::
 
 ## システムアップデートを確認する
@@ -36,6 +35,7 @@ $ adb shell getprop ro.sys.fd.version
   $ adb shell dumpsys activity service \
       ai.fd.thinklet.app.mdmclient/.MdmClientService \
       --firmware hasUpdate
+  result here
   ```
 次のように表示される場合、利用可能なアップデートがあります。  
   ```
@@ -75,6 +75,7 @@ $ adb shell getprop ro.sys.fd.version
       Downloading update files...
   ```
 THINKLETが自動で再起動されるのをそのままお待ち下さい。  
+アップデートが正常に進行しているか確認する場合は、[その他、システムアップデートの便利な機能](#その他システムアップデートの便利な機能) の `progress` コマンドでご確認ください。  
 再起動後、[アップデートがあるかを確認する](#アップデートがあるかを確認する) と同じ手順で、正常にアップデートが完了したことを確認できます。
 
 ## エラーとその対応

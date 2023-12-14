@@ -116,7 +116,7 @@ Windowsの場合は、エクスプローラーから `Shiftキー` ＋ `右ク�
 `adb push` を使うことで、PC上のファイルをTHINKLET上にコピーできます。  
 これを用いて、PC上のキーコンフィグファイルをTHINKLETに配置します。以下のコマンドを1行ずつ実行してください。
 
-  ```bash
+  ```
   $ adb push key_config.json /sdcard/Android/data/ai.fd.thinklet.app.launcher/files/key_config.json
   $ adb shell input keyevent KEYCODE_APP_SWITCH
   $ adb shell input keyevent HOME

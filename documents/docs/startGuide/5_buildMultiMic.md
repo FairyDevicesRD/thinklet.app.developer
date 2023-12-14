@@ -125,13 +125,13 @@ Android向けのライブラリである`AAR`には、`AndroidManifest.xml`が�
   - scrcpy上でHomeに移動しても構いません。
 - 録音されているかを確認するには、以下のコマンドでファイルが生成されているかを確認します。   
 rawファイルが生成されていれば、録音できています。
-  ```bash
-  $ adb shell /sdcard/Android/data/com.example.fd.multichannelaudiorecorder/files/
+  ```
+  $ adb shell ls /sdcard/Android/data/com.example.fd.multichannelaudiorecorder/files/
   6ch_48kHz_2023-09-11-22-33-44.raw
   ```
 ## 再生
 - 録音したファイルを取り出します。
-  ```bash
+  ```
   $ adb pull /sdcard/Android/data/com.example.fd.multichannelaudiorecorder/files/6ch_48kHz_2023-09-11-22-33-44.raw /path/to/save_dir/
   ```
 - Rawファイルの再生には、[Audacity](https://www.audacityteam.org/) を使用します。
