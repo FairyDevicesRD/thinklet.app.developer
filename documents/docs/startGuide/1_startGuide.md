@@ -19,9 +19,9 @@ tags:
 
 - 事前に、PCの要求スペックについては、[developer.android.com #install](https://developer.android.com/studio/install?hl=ja) をご確認ください。
 - また、本ドキュメントでは、`adb` コマンドを多用します。
-  - `adb` コマンドは、WindowsならPowershellや、コマンドプロンプト、MacやLinuxならばターミナルから実行します。
+  - `adb` コマンドは、WindowsならPowerShellや、コマンドプロンプト、MacやLinuxならばターミナルから実行します。
   - `adb` コマンド自体は、途中でセットアップします。
-  - 現時点では、Powershellやターミナルの起動の方法をご確認ください。
+  - 現時点では、PowerShellやターミナルの起動の方法をご確認ください。
 - なお、[LINKLET](https://linklet.ai/) としてご利用頂いているTHINKLETは、開発機としてはご利用できません。
 
 ## THINKLETとは
