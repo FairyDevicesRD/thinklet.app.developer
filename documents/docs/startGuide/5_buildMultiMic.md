@@ -81,12 +81,12 @@ Android向けのライブラリである`AAR`には、`AndroidManifest.xml`が�
 :::
 
 ## マルチマイク録音クラスの実装
-- `samples/multiChannelAudioRecorder/app/src/main/java/com/example/fd/multichannelaudiorecorder/MainActivity.kt` と同じディレクトリに、  
-`samples/multiChannelAudioRecorder/app/src/main/java/com/example/fd/multichannelaudiorecorder/FiveChannelRecorder.kt` を作成し、記述していきます。
+- `app/src/main/java/com/example/fd/multichannelaudiorecorder/MainActivity.kt` と同じディレクトリに、  
+`app/src/main/java/com/example/fd/multichannelaudiorecorder/FiveChannelRecorder.kt` を作成し、記述していきます。
 - 記述する内容は、実装済みの <FiveChannelRecorder /> をコピーしてください。
   - なお、パッケージ名を変えている場合は適宜変更してください。
 ## 起動で録音開始、終了で録音終了
-- `samples/multiChannelAudioRecorder/app/src/main/java/com/example/fd/multichannelaudiorecorder/MainActivity.kt` が起動したら、  
+- `app/src/main/java/com/example/fd/multichannelaudiorecorder/MainActivity.kt` が起動したら、  
 録音を開始して、アプリが閉じられたら録音を停止するようにします。
 - 必要最低限の実装としては以下になります。
   ```kotlin

@@ -51,12 +51,12 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
   ```
 
 ## 録画クラスの実装
-- `samples/videoRecorder/app/src/main/java/com/example/fd/camera/MainActivity.kt` と同じディレクトリに、  
-`samples/videoRecorder/app/src/main/java/com/example/fd/camera/VideoRecorder.kt` を新規作成し、記述していきます。
+- `app/src/main/java/com/example/fd/camera/MainActivity.kt` と同じディレクトリに、  
+`app/src/main/java/com/example/fd/camera/VideoRecorder.kt` を新規作成し、記述していきます。
 - 記述する内容は、<VideoRecorder /> をコピーしてください。
   - なお、パッケージ名を変えている場合や、CameraXのVersionが異なる場合は、適宜変更してください。
 ## 起動で録画開始、終了で録画終了
-- `samples/videoRecorder/app/src/main/java/com/example/fd/camera/MainActivity.kt` が起動したら、  
+- `app/src/main/java/com/example/fd/camera/MainActivity.kt` が起動したら、  
 録画を開始して、アプリが閉じられたら録画を停止するようにします。
 - 必要最低限の実装としては以下になります。
   ```kotlin
