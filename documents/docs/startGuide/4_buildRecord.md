@@ -5,6 +5,8 @@ tags:
   - Video Record
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
 
 # 録画アプリをつくってみる
@@ -20,19 +22,37 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
 - MinimumSDK Versionには、`API 27: Android 8.1 (Oreo)` を選択します。
 
 ## CameraX 導入
-- 手軽に録画アプリを実現するために、`CameraX` を使用します。使用するには、 `app/build.gradle` に以下を追加します。
-  ```gradle
-  dependencies {
-      implementation 'androidx.core:core-ktx:1.8.0'
-      implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-      (中略)
-  // highlight-start
-  +   def cameraX = "1.2.3"
-  +   implementation "androidx.camera:camera-video:$cameraX"
-  +   implementation "androidx.camera:camera-lifecycle:$cameraX"
-  +   implementation "androidx.camera:camera-camera2:$cameraX"
-  // highlight-end
-  ```
+- 手軽に録画アプリを実現するために、`CameraX` を使用します。使用するには、 `app/build.gradle` または `app/build.gradle.kts` に以下を追加します。
+  <Tabs>
+    <TabItem value="Groovy" label="Groovy(.gradle)">
+    ```gradle
+    dependencies {
+        implementation 'androidx.core:core-ktx:1.8.0'
+        implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+        (中略)
+    // highlight-start
+    +   def cameraX = "1.2.3"
+    +   implementation "androidx.camera:camera-video:$cameraX"
+    +   implementation "androidx.camera:camera-lifecycle:$cameraX"
+    +   implementation "androidx.camera:camera-camera2:$cameraX"
+    // highlight-end
+    ```
+    </TabItem>
+    <TabItem value="Kotlin" label="Kotlin(.gradle.kts)" default>
+    ```gradle
+    dependencies {
+        implementation("androidx.core:core-ktx:1.8.0")
+        implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+        (中略)
+    // highlight-start
+    +   val cameraX = "1.2.3"
+    +   implementation("androidx.camera:camera-video:$cameraX")
+    +   implementation("androidx.camera:camera-lifecycle:$cameraX")
+    +   implementation("androidx.camera:camera-camera2:$cameraX")
+    // highlight-end
+    ```
+    </TabItem>
+  </Tabs>
 ## Permission を設定
 - カメラとマイクを使いますので、Permissionの宣言が必要となります。Permissionについては、[developer.android.com #permission](https://developer.android.com/guide/topics/permissions/overview?hl=ja) を確認ください。
 

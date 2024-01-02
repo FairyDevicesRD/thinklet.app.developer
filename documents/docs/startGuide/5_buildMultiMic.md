@@ -6,6 +6,8 @@ tags:
   - Record Audio
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import {SampleMultiAudioRecorderRoot, FiveChannelRecorder} from '../_links.js'
 
 # マルチマイクで録音するアプリをつくってみる
@@ -26,47 +28,85 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
   - GithubPackagesについては、[こちら](https://docs.github.com/ja/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries) も参照ください。
 ### アクセストークンを設定
 - 発行したトークンなどを、作成した `com.example.fd.multichannelaudiorecorder`（または任意のプロジェクト名）に設定していきます。
-- プロジェクト直下の `settings.gradle` ファイルに以下を追記します。これにより、ビルドシステムが必要なライブラリを見つけられるようになります。
-  ```gradle
-  dependencyResolutionManagement {
-      repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-      repositories {
-          google()
-          mavenCentral()
-  // highlight-start
-  +       maven {
-  +           name = "GitHubPackages"
-  +           url = uri("https://maven.pkg.github.com/FairyDevicesRD/thinklet.app.sdk")
-  +           credentials {
-  +               Properties properties = new Properties()
-  +               properties.load(file('github.properties').newDataInputStream())
-  +               username = properties.getProperty("username") ?: ""
-  +               password = properties.getProperty("token") ?: ""
-  +           }
-  // highlight-end
-          }
-      }
-  }
-  rootProject.name = "MultiChannelAudioRecorder"
-  include ':app'
-  ```
-- 次に、`settings.gradle` があるプロジェクト直下で、 `github.properties` ファイルを新規作成し、以下の内容を追記します。
-  ```gradle
+- プロジェクト直下の `settings.gradle` または， `settings.gradle.kts` ファイルに以下を追記します。これにより、ビルドシステムが必要なライブラリを見つけられるようになります。
+  <Tabs>
+    <TabItem value="Groovy" label="Groovy(.gradle)">
+    ```gradle
+    dependencyResolutionManagement {
+        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+        repositories {
+            google()
+            mavenCentral()
+    // highlight-start
+    +       maven {
+    +           name = "GitHubPackages"
+    +           url = uri("https://maven.pkg.github.com/FairyDevicesRD/thinklet.app.sdk")
+    +           credentials {
+    +               Properties properties = new Properties()
+    +               properties.load(file('github.properties').newDataInputStream())
+    +               username = properties.getProperty("username") ?: ""
+    +               password = properties.getProperty("token") ?: ""
+    +           }
+    +       }
+    // highlight-end
+        }
+    }
+    rootProject.name = "MultiChannelAudioRecorder"
+    include ':app'
+    ```
+    </TabItem>
+    <TabItem value="Kotlin" label="Kotlin(.gradle.kts)" default>
+    ```gradle
+    dependencyResolutionManagement {
+        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+        repositories {
+            google()
+            mavenCentral()
+    // highlight-start
+    +       credentials {
+    +           val properties = java.util.Properties()
+    +           properties.load(file("github.properties").inputStream())
+    +           username = properties.getProperty("username") ?: ""
+    +           password = properties.getProperty("token") ?: ""
+    +       }
+    // highlight-end
+        }
+    }
+    rootProject.name = "MultiChannelAudioRecorder"
+    include ':app'
+    ```
+    </TabItem>
+  </Tabs>
+- 次に、`settings.gradle` または `settings.gradle.kts` があるプロジェクト直下で、 `github.properties` ファイルを新規作成し、以下の内容を追記します。
+  ```properties
   // highlight-start
   + username=あなたの Github username
   + token=発行したトークン
   // highlight-end
   ```
-- 次に、`app/build.gradle` ファイルに以下を追記します。
-  ```gradle
-  dependencies {
-
-    implementation 'androidx.core:core-ktx:1.8.0'
-    (中略)
-    implementation 'androidx.compose.material3:material3'
-  // highlight-next-line
-  + implementation 'ai.fd.thinklet:sdk-audio:0.0.4'
-  ```
+- 次に、`app/build.gradle` または `app/build.gradle.kts` ファイルに以下を追記します。
+  <Tabs>
+    <TabItem value="Groovy" label="Groovy(.gradle)">
+    ```gradle
+    dependencies {
+      implementation 'androidx.core:core-ktx:1.8.0'
+      implementation 'androidx.compose.material3:material3'
+      (中略)
+    // highlight-next-line
+    + implementation 'ai.fd.thinklet:sdk-audio:0.0.4'
+    ```
+    </TabItem>
+    <TabItem value="Kotlin" label="Kotlin(.gradle.kts)" default>
+    ```gradle
+    dependencies {
+      implementation("androidx.core:core-ktx:1.8.0")
+      implementation("androidx.compose.material3:material3")
+      (中略)
+    // highlight-next-line
+    + implementation("ai.fd.thinklet:sdk-audio:0.0.4")
+    ```
+    </TabItem>
+  </Tabs>
 - 最後に、Android Studioを操作します。
   - 画面上部に表示されている `Sync Now` をクリックします。
   ![sync](./img/studio/sync.jpg)
