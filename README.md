@@ -10,7 +10,7 @@
   - [Contribute](#contribute)
 
 ## 概要
-- THINKLET向けのアプリケーション開発を行うための開発者向けドキュメントと，サンプルを公開しています.
+- THINKLET向けのアプリケーション開発を行うための[開発者向けドキュメント](https://fairydevicesrd.github.io/thinklet.app.developer/)と，サンプルを公開しています.
 
 ## ライセンス
 - [サンプルソースコード](./samples)は[MITライセンス](./LICENSE)の元で公開します.
