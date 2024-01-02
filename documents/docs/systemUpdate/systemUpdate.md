@@ -8,11 +8,11 @@ tags:
 # システムアップデート
 ここでは、THINKLETのシステムアップデートの手順をまとめています。  
 システムアップデートでは、THINKLETのプリインストールアプリとOSの更新ができます。  
-最新の機能の提供や、不具合の修正がなされていますので、定期的にご確認ください。
+最新の機能の提供や、不具合の修正がなされていますので、定期的に確認ください。
 
 :::info
 THINKLETのシステムアップデートには、`adb` 接続が必要です。  
-設定がまだの方は、先に、[adb設定](../startGuide/3_helloworld.md#adb設定) をご確認ください。
+設定がまだの方は、先に、[adb設定](../startGuide/3_helloworld.md#adb設定) を確認ください。
 :::
 
 :::warning
@@ -79,7 +79,7 @@ $ adb shell getprop ro.sys.fd.version
       Downloading update files...
   ```
 THINKLETが自動で再起動されるのをそのままお待ち下さい。  
-アップデートが正常に進行しているか確認する場合は、[その他、システムアップデートの便利な機能](#その他システムアップデートの便利な機能) の `progress` コマンドでご確認ください。  
+アップデートが正常に進行しているか確認する場合は、[その他、システムアップデートの便利な機能](#その他システムアップデートの便利な機能) の `progress` コマンドで確認ください。  
 再起動後、[アップデートがあるかを確認する](#アップデートがあるかを確認する) と同じ手順で、正常にアップデートが完了したことを確認できます。
 
 ## エラーとその対応
@@ -119,34 +119,34 @@ THINKLETが自動で再起動されるのをそのままお待ち下さい。
 1. `progress`
 システムアップデートのためのファイル取得状況を表示します。  
 `update` を実行した後、進捗を確認したい場合に利用できます。
-- 実行例
-  ```console
-  // highlight-start
-  $ adb shell dumpsys activity service \
-    ai.fd.thinklet.app.mdmclient/.MdmClientService \
-    --firmware progress
-  // highlight-end
-  ```
-- 実行結果
-  ```console
-  SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
-    Client:
-      Downloading: 12 %
-  ```
+   - 実行例
+     ```console
+     // highlight-start
+     $ adb shell dumpsys activity service \
+       ai.fd.thinklet.app.mdmclient/.MdmClientService \
+       --firmware progress
+     // highlight-end
+     ```
+   - 実行結果
+     ```console
+     SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
+       Client:
+         Downloading: 12 %
+     ```
 2. `current`
 現在のTHINKLETのバージョンを表示します。  
 `adb shell getprop ro.sys.fd.version` で取得できる結果と同じです。
-- 実行例
-  ```console
-  // highlight-start
-  $ adb shell dumpsys activity service \
-    ai.fd.thinklet.app.mdmclient/.MdmClientService \
-    --firmware current
-  // highlight-end
-  ```
-- 実行結果
-  ```console
-  SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
-    Client:
-      Current firmware version: 10.000.0
-  ```
+   - 実行例
+     ```console
+     // highlight-start
+     $ adb shell dumpsys activity service \
+       ai.fd.thinklet.app.mdmclient/.MdmClientService \
+       --firmware current
+     // highlight-end
+     ```
+   - 実行結果
+     ```console
+     SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
+       Client:
+         Current firmware version: 10.000.0
+     ```

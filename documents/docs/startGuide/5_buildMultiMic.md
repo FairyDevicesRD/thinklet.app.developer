@@ -23,9 +23,10 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
 - ここでは、その設定をします。
 ### Github 個人用アクセストークン発行
 - THINKLET App SDKには、Githubアカウントが必須です。アカウントを持っていない方は、[Github](https://docs.github.com/ja/get-started/signing-up-for-github/signing-up-for-a-new-github-account) よりアカウントを作成して下さい。
-- [個人用アクセス トークン](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-token-classic-%E3%81%AE%E4%BD%9C%E6%88%90) に従い、アクセストークン（以下、トークン）を発行します。トークンのスコープには、`read:packages` が必要です。
+- [Creating a personal access token (classic)](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) に従い、アクセストークン（以下、トークン）を発行します。トークンのスコープには、`read:packages` が必要です。
   - トークンは、パスワードと同様の扱いとしてください。
   - GithubPackagesについては、[こちら](https://docs.github.com/ja/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries) も参照ください。
+  - トークンには、`Fine-grained personal access tokens` もありますが、執筆時点では、Github Packagesが `personal access token (classic)` のみをサポートしています。
 ### アクセストークンを設定
 - 発行したトークンなどを、作成した `com.example.fd.multichannelaudiorecorder`（または任意のプロジェクト名）に設定していきます。
 - プロジェクト直下の `settings.gradle` または， `settings.gradle.kts` ファイルに以下を追記します。これにより、ビルドシステムが必要なライブラリを見つけられるようになります。
@@ -125,7 +126,7 @@ Android向けのライブラリである`AAR`には、`AndroidManifest.xml`が�
 ## マルチマイク録音クラスの実装
 - `app/src/main/java/com/example/fd/multichannelaudiorecorder/MainActivity.kt` と同じディレクトリに、  
 `app/src/main/java/com/example/fd/multichannelaudiorecorder/FiveChannelRecorder.kt` を作成し、記述していきます。
-- 記述する内容は、実装済みの <FiveChannelRecorder /> をコピーしてください。
+- 記述する内容は、実装済みの <FiveChannelRecorder /> をコピペしてください。
   - なお、パッケージ名を変えている場合は適宜変更してください。
 ## 起動で録音開始、終了で録音終了
 - `app/src/main/java/com/example/fd/multichannelaudiorecorder/MainActivity.kt` が起動したら、  

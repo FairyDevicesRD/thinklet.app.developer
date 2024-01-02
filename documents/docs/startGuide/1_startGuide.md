@@ -17,11 +17,11 @@ tags:
     - 参考2: [Adb 有効無効 切り替え機能](https://github.com/FairyDevicesRD/thinklet.app.sdk#%E9%96%8B%E7%99%BA%E8%80%85%E3%83%A2%E3%83%BC%E3%83%89)
   :::
 
-- 事前に、PCの要求スペックについては、[developer.android.com #install](https://developer.android.com/studio/install?hl=ja) をご確認ください。
+- 事前に、Android Studioの実行に必要なPCの要求スペックについて、[developer.android.com #install](https://developer.android.com/studio/install?hl=ja) を確認ください。
 - また、本ドキュメントでは、`adb` コマンドを多用します。
   - `adb` コマンドは、WindowsならPowerShellや、コマンドプロンプト、MacやLinuxならばターミナルから実行します。
   - `adb` コマンド自体は、途中でセットアップします。
-  - 現時点では、PowerShellやターミナルの起動の方法をご確認ください。
+  - 現時点では、PowerShellやターミナルの起動の方法を確認ください。
 - なお、[LINKLET](https://linklet.ai/) としてご利用頂いているTHINKLETは、開発機としてはご利用できません。
 
 ## THINKLETとは

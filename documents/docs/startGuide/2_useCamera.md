@@ -13,7 +13,7 @@ THINKLETにはディスプレイは搭載されていません。
 つまり、THINKLETはディスプレイを持たないだけで、それ以外はAndroidデバイスとほぼ同じです。
 
 1. THINKLETの電源をつけていない場合、電源をつける
-   - 電源ボタンを振動するまで長押しをしてください。
+   - 振動するまで電源ボタンを長押しをしてください。
    - 日本語音声で「電源をつけました」、または英語音声で「Power On」とアナウンスされたら起動完了です。
 2. PCとTHINKLETをUSBケーブルで接続する
    - THINKLETのUSB Type-C ポートは、充電とデータ通信を兼用しています。
@@ -22,7 +22,7 @@ THINKLETにはディスプレイは搭載されていません。
    - `scrcpy` は、Genymobile社が提供する`adb`を用いて、Androidデバイスの画面をPCにミラーリングするソフトウェアです。  
    Windows, macOS,Linux向けにそれぞれ提供されています。THINKLETもAndroidと互換性がありますので`scrcpy`が利用できます。
      - 類似のソフトウェアとして、`Vysor`,`Total Control` などもありますが、どちらもミラーリングするデバイスに専用のアプリをインストールします。
-     - `scrcpy`は専用のアプリのインストールを必要としません。利用後に不要なアプリを削除する手間が不要ですので、`scrcpy`を推奨しています。また、`scrcpy`はミラーリングだけでなく、マウスやキーボードから操作をできます。
+     - `scrcpy`は専用のアプリのインストールを必要としません。利用後に不要なアプリを削除する手間が不要ですので、`scrcpy`を推奨しています。また、`scrcpy`はミラーリングだけでなく、マウスやキーボードから操作できます。
    - インストール手順は下記を参照ください。
      - Windows向け：https://github.com/Genymobile/scrcpy/blob/master/doc/windows.md
      - Linux向け：https://github.com/Genymobile/scrcpy/blob/master/doc/linux.md
@@ -62,7 +62,7 @@ THINKLETにプリインストールしているカメラアプリを起動し、
     style={{ width: '300px', margin: '20px'}}
   />
 
-2. このアプリは、画面右下から写真撮影、動画撮影モードを切り替えることができます。
+1. このアプリは、画面右下のカメラアイコン、ビデオアイコンから写真撮影、動画撮影モードを切り替えができます。
 
   <img
     src={require('./img/snapdragon/choose.jpg').default}
