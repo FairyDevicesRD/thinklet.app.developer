@@ -33,6 +33,7 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
       repositories {
           google()
           mavenCentral()
+  // highlight-start
   +       maven {
   +           name = "GitHubPackages"
   +           url = uri("https://maven.pkg.github.com/FairyDevicesRD/thinklet.app.sdk")
@@ -42,16 +43,19 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
   +               username = properties.getProperty("username") ?: ""
   +               password = properties.getProperty("token") ?: ""
   +           }
+  // highlight-end
           }
       }
   }
   rootProject.name = "MultiChannelAudioRecorder"
   include ':app'
   ```
-- 次に、`settings.gradle` があるプロジェクト直下で、 `github.properties` ファイルを新規作成し、以下のように追記します。
+- 次に、`settings.gradle` があるプロジェクト直下で、 `github.properties` ファイルを新規作成し、以下の内容を追記します。
   ```gradle
+  // highlight-start
   + username=あなたの Github username
   + token=発行したトークン
+  // highlight-end
   ```
 - 次に、`app/build.gradle` ファイルに以下を追記します。
   ```gradle
@@ -60,7 +64,7 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
     implementation 'androidx.core:core-ktx:1.8.0'
     (中略)
     implementation 'androidx.compose.material3:material3'
-
+  // highlight-next-line
   + implementation 'ai.fd.thinklet:sdk-audio:0.0.4'
   ```
 - 最後に、Android Studioを操作します。
@@ -72,12 +76,10 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
 - 今回利用する `ai.fd.thinklet:sdk-audio` にはすでに、`android.permission.RECORD_AUDIO` が宣言されています。AndroidManifestへの個別の記載は不要です。
 
 :::tip
-
 Android向けのライブラリである`AAR`には、`AndroidManifest.xml`が組み込まれています。これにより、ライブラリを利用したいアプリにPermissionなどの情報を追加できます。  
 例えば、`android.permission.INTERNET` を宣言していないのに通信ができるときは、依存ライブラリですでに宣言していたりします。  
 依存ライブラリを使用することで、どのようなAndroidManifestになるかについては、Android Studioの「Merged Manifest」から確認ができます。
 詳しくは、 [developer.android.com #manifest-merge](https://developer.android.com/studio/build/manifest-merge?hl=ja) をご参照ください。
-
 :::
 
 ## マルチマイク録音クラスの実装
@@ -91,10 +93,12 @@ Android向けのライブラリである`AAR`には、`AndroidManifest.xml`が�
 - 必要最低限の実装としては以下になります。
   ```kotlin
   class MainActivity : ComponentActivity() {
+  // highlight-next-line
   +  private var fiveChannelRecorder: FiveChannelRecorder? = null
 
      // (中略)
 
+  // highlight-start
   +  override fun onResume() {
   +      super.onResume()
   +      if (!FiveChannelRecorder.checkPermission(this)) {
@@ -110,28 +114,32 @@ Android向けのライブラリである`AAR`には、`AndroidManifest.xml`が�
   +      fiveChannelRecorder = null
   +      super.onPause()
   +  }
+  // highlight-end
   ```
 ## デバッグ
 - Android Studioからデバッグ実行して、THINKLETにこのアプリをインストールします。
   - ただし、初回デバッグ時は、Permissionを許可するような実装をしていませんので、何もできないアプリが起動するだけです。
 - 次のコマンドでインストールしたアプリにPermissionを許可します。
   - scrcpyから画面操作をし、Permissionを許可しても構いません。
-  ```bash
+  ```console
   # adb shell pm grant (パッケージ名) （許可するPermission名）
-  adb shell pm grant com.example.fd.multichannelaudiorecorder android.permission.RECORD_AUDIO
+  // highlight-next-line
+  $ adb shell pm grant com.example.fd.multichannelaudiorecorder android.permission.RECORD_AUDIO
   ```
 - Android Studioからデバッグ実行をもう一度します。
 - 20秒ほど起動し、音を出したり、マイクを抑えたりします。その後、THINKLETの電源ボタンを短押しして、画面をHomeに移動します。
   - scrcpy上でHomeに移動しても構いません。
 - 録音されているかを確認するには、以下のコマンドでファイルが生成されているかを確認します。   
 rawファイルが生成されていれば、録音できています。
-  ```
+  ```console
+  // highlight-next-line
   $ adb shell ls /sdcard/Android/data/com.example.fd.multichannelaudiorecorder/files/
   6ch_48kHz_2023-09-11-22-33-44.raw
   ```
 ## 再生
 - 録音したファイルを取り出します。
-  ```
+  ```console
+  // highlight-next-line
   $ adb pull /sdcard/Android/data/com.example.fd.multichannelaudiorecorder/files/6ch_48kHz_2023-09-11-22-33-44.raw /path/to/save_dir/
   ```
 - Rawファイルの再生には、[Audacity](https://www.audacityteam.org/) を使用します。

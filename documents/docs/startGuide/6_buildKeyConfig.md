@@ -19,14 +19,16 @@ scrcpyを介し、任意のアプリを起動できますが、scrcpyが扱え�
 ### 作成の前に
 ここでは、adbコマンドを用いて、キーコンフィグの設定を確認します。アプリの起動には、次のコマンドを利用します。
 
-  ```bash
-  adb shell am start -n <パッケージ名>/<パッケージ名を含む起動するActivityクラス名>
+  ```console
+  // highlight-next-line
+  $ adb shell am start -n <パッケージ名>/<パッケージ名を含む起動するActivityクラス名>
   ```
 
 例えば、[録画アプリをつくってみる](./4_buildRecord.md) で作成したアプリを起動するには、次のようになります。
 
-  ```bash
-  adb shell am start -n com.example.fd.camera/com.example.fd.camera.MainActivity
+  ```console
+  // highlight-next-line
+  $ adb shell am start -n com.example.fd.camera/com.example.fd.camera.MainActivity
   ```
 
 この場合、パッケージ名は、`com.example.fd.camera` です。  
@@ -35,16 +37,15 @@ scrcpyを介し、任意のアプリを起動できますが、scrcpyが扱え�
 キーコンフィグの設定には、この起動したいアプリの「パッケージ名」と、「パッケージ名を含む起動するアクティビティクラス名」が必要となります。
 
 :::tip
-
 キーコンフィグを設定しても、任意のアプリが起動しないときは、一度Adbコマンドから実行してみることで、デバッグ、動作確認できます。
-
 :::
 
 同様に、[マルチマイクで録音するアプリをつくってみる](./5_buildMultiMic.md) で作成したアプリを起動する設定も確認します。  
 本ドキュメントの通りならば、次のようになります。
 
-  ```bash
-  adb shell am start -n com.example.fd.multichannelaudiorecorder/com.example.fd.multichannelaudiorecorder.MainActivity
+  ```console
+  // highlight-next-line
+  $ adb shell am start -n com.example.fd.multichannelaudiorecorder/com.example.fd.multichannelaudiorecorder.MainActivity
   ```
 
 この場合、パッケージ名は、`com.example.fd.multichannelaudiorecorder` です。  
@@ -116,10 +117,12 @@ Windowsの場合は、エクスプローラーから `Shiftキー` ＋ `右ク�
 `adb push` を使うことで、PC上のファイルをTHINKLET上にコピーできます。  
 これを用いて、PC上のキーコンフィグファイルをTHINKLETに配置します。以下のコマンドを1行ずつ実行してください。
 
-  ```
+  ```console
+  // highlight-start
   $ adb push key_config.json /sdcard/Android/data/ai.fd.thinklet.app.launcher/files/key_config.json
   $ adb shell input keyevent KEYCODE_APP_SWITCH
   $ adb shell input keyevent HOME
+  // highlight-end
   ```
 
 `adb shell input keyevent xxxx` は、画面をタップするようなキーイベントを実行させるコマンドです。  

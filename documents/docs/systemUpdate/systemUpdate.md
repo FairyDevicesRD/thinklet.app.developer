@@ -18,7 +18,8 @@ THINKLETのシステムアップデートには、`adb` 接続が必要です。
 :::warning
 ここで紹介するTHINKLETのシステムアップデートの手順は、お使いのTHINKLETが、`10.000.0` 以降バージョンで動作します。  
 今のバージョンの確認方法は、以下のadbコマンドで確認できます。
-```
+```console
+// highlight-next-line
 $ adb shell getprop ro.sys.fd.version
 10.000.0
 ```
@@ -31,20 +32,21 @@ $ adb shell getprop ro.sys.fd.version
 1. 電源をつけ、adb接続ができるTHINKLETとPCを接続します。
 2. THINKLETをWi-Fi、またはSIMカードを用いて、モバイルネットワークに接続し、THINKLETをオンラインにします。
 3. 次のコマンドを実行します。
-  ```
+  ```console
+  // highlight-start
   $ adb shell dumpsys activity service \
       ai.fd.thinklet.app.mdmclient/.MdmClientService \
       --firmware hasUpdate
-  result here
+  // highlight-end
   ```
 次のように表示される場合、利用可能なアップデートがあります。  
-  ```
+  ```console
   SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
     Client:
       Version 10.000.0 is available
   ```
 次のように表示される場合、すでに最新を利用しています。アップデートの必要はありません。
-  ```
+  ```console
   SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
     Client:
       This is the latest version
@@ -63,13 +65,15 @@ $ adb shell getprop ro.sys.fd.version
 2. THINKLETをWi-Fi、またはSIMカードを用いて、モバイルネットワークに接続し、THINKLETをオンラインにします。
    - システムアップデートには通信が発生します。**安定したWi-Fiのご利用を強く推奨**します。
 3. 次のコマンドを実行します。
-  ```
+  ```console
+  // highlight-start
   $ adb shell dumpsys activity service \
       ai.fd.thinklet.app.mdmclient/.MdmClientService \
       --firmware update
+  // highlight-end
   ```
 次のように表示される場合、アップデートが正常に開始しています。
-  ```
+  ```console
   SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
     Client:
       Downloading update files...
@@ -116,13 +120,15 @@ THINKLETが自動で再起動されるのをそのままお待ち下さい。
 システムアップデートのためのファイル取得状況を表示します。  
 `update` を実行した後、進捗を確認したい場合に利用できます。
 - 実行例
-  ```
+  ```console
+  // highlight-start
   $ adb shell dumpsys activity service \
     ai.fd.thinklet.app.mdmclient/.MdmClientService \
     --firmware progress
+  // highlight-end
   ```
 - 実行結果
-  ```
+  ```console
   SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
     Client:
       Downloading: 12 %
@@ -131,13 +137,15 @@ THINKLETが自動で再起動されるのをそのままお待ち下さい。
 現在のTHINKLETのバージョンを表示します。  
 `adb shell getprop ro.sys.fd.version` で取得できる結果と同じです。
 - 実行例
-  ```
+  ```console
+  // highlight-start
   $ adb shell dumpsys activity service \
     ai.fd.thinklet.app.mdmclient/.MdmClientService \
     --firmware current
+  // highlight-end
   ```
 - 実行結果
-  ```
+  ```console
   SERVICE ai.fd.thinklet.app.mdmclient/.MdmClientService xxxx pid=xxxx
     Client:
       Current firmware version: 10.000.0

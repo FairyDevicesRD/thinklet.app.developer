@@ -46,13 +46,14 @@ OSには、AOSP(Android Open Source Project) をベースとしたFairy OSを開
 (5) 5つのマイク
 (6) 広角カメラ
 (7) ジェスチャーセンサー（ハンドジェスチャー用）
+```
 
-補足：
+:::tip
 - KEYCODE_VOLUME_DOWN は、Androidでは音量を下げるキーイベントを指します。
 - KEYCODE_VOLUME_UP は、Androidでは音量を上げるキーイベントを指します。
 - KEYCODE_CAMERA は、Androidではカメラキーイベントを指します。
 - KEYCODE_POWER は、Androidでは電源ボタンのキーイベントを指します。
-```
+:::
 
 ![](./img/hw/l.jpg)
 ![](./img/hw/d.jpg)

@@ -6,12 +6,12 @@
 
 ### Local Development
 
-```
+```console
 $ bun install && bun run start
 ```
 
 ### Build
 
-```
+```console
 $ bun run build
 ```

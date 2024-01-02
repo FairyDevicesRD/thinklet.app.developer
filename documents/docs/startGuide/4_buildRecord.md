@@ -26,11 +26,12 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
       implementation 'androidx.core:core-ktx:1.8.0'
       implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
       (中略)
-
-  +    def cameraX = "1.2.3"
-  +    implementation "androidx.camera:camera-video:$cameraX"
-  +    implementation "androidx.camera:camera-lifecycle:$cameraX"
-  +    implementation "androidx.camera:camera-camera2:$cameraX"
+  // highlight-start
+  +   def cameraX = "1.2.3"
+  +   implementation "androidx.camera:camera-video:$cameraX"
+  +   implementation "androidx.camera:camera-lifecycle:$cameraX"
+  +   implementation "androidx.camera:camera-camera2:$cameraX"
+  // highlight-end
   ```
 ## Permission を設定
 - カメラとマイクを使いますので、Permissionの宣言が必要となります。Permissionについては、[developer.android.com #permission](https://developer.android.com/guide/topics/permissions/overview?hl=ja) を確認ください。
@@ -42,12 +43,14 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
   <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools">
 
+  // highlight-start
   +    <uses-permission android:name="android.permission.RECORD_AUDIO" />
   +    <uses-permission android:name="android.permission.CAMERA"/>
   +
   +    <uses-feature
   +        android:name="android.hardware.camera"
   +        android:required="false" />
+  // highlight-end
   ```
 
 ## 録画クラスの実装
@@ -61,10 +64,12 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
 - 必要最低限の実装としては以下になります。
   ```kotlin
   class MainActivity : ComponentActivity() {
+  //highlight-next-line
   +    private var videoRecorder: VideoRecorder? = null
 
       // (中略)
 
+  // highlight-start
   +   override fun onResume() {
   +       super.onResume()
   +       if (!VideoRecorder.checkPermission(this)) {
@@ -82,6 +87,7 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
   +        videoRecorder?.stopRecording()
   +        super.onPause()
   +    }
+  // highlight-end
   ```
 
 :::info
@@ -99,32 +105,34 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
   - ただし、初回デバッグ時は、Permissionを許可するような実装をしていませんので、何もできないアプリが起動するだけです。
 - 次のコマンドでインストールしたアプリにPermissionを許可します。
   - scrcpyから画面操作し、Permissionを許可しても構いません。
-  ```bash
+  ```console
   # adb shell pm grant (パッケージ名) （許可するPermission名）
-  adb shell pm grant com.example.fd.camera android.permission.RECORD_AUDIO
-  adb shell pm grant com.example.fd.camera android.permission.CAMERA
+  // highlight-start
+  $ adb shell pm grant com.example.fd.camera android.permission.RECORD_AUDIO
+  $ adb shell pm grant com.example.fd.camera android.permission.CAMERA
+  // highlight-end
   ```
 - Android Studioからデバッグ実行をもう一度します。
 - 20秒ほど放置し、THINKLETの電源ボタンを短押しして、画面をHomeに移動します。
   - scrcpy上でHomeに移動しても構いません。
 - 以下のコマンドを実行してファイルが生成されているかを確認します。  
 mp4ファイルが生成されていれば、録画ができています。
-  ```
+  ```console
+  // highlight-next-line
   $ adb shell ls /sdcard/Android/data/com.example.fd.camera/files/
   CameraX-recording-1694083279133.mp4
   ```
 ## 再生
 - 録画したファイルを取り出します。  
 取り出すには次のコマンドを実行します。
-  ```
+  ```console
+  // highlight-next-line
   $ adb pull /sdcard/Android/data/com.example.fd.camera/files/CameraX-recording-1694083279133.mp4 /path/to/save_dir/
   ```
 - 視聴するには、汎用の再生ソフトを使用してください。
 
 :::tip
-
-うまくデバッグが実行できない、エラーが発生する等の場合は、「HelloWorldアプリをつくってみる」のチュートリアルや、
+うまくデバッグが実行できない、エラーが発生する等の場合は、「HelloWorldアプリをつくってみる」のチュートリアルや、  
 サンプル実装と見比べてください。
 また、JDKのVersionが古すぎる、Android SDK, Pathの設定に誤りがあるなどが考えられます。
-
 :::

@@ -21,12 +21,14 @@ THINKLETには画面がありません。
 
 最も簡単な方法は、アプリをインストールする際に、Permissionを許可してInstallする方法です。  
 下記のように、`-g` オプションを付与してインストールすることが、許可された状態でインストールされます。
-```
+```console
+// highlight-next-line
 $ adb install -g xxx.apk
 ```
 
 または、Permissionとパッケージ名を指定して、許可できます。
-```
+```console
+// highlight-next-line
 $ adb shell pm grant <パッケージ名> <Permission名>
 ```
 
@@ -42,6 +44,7 @@ Sleep機能は、省電力になるメリットがありますが、ウェアラ
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
+    // highlight-next-line
     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 }
 ```
@@ -78,12 +81,12 @@ Androidでは、画面分割、オーバーレイ、バックグラウンドの�
 ## 保存先（File）
 THINKLETに限った話ではありませんが、ファイルの保存先は適切にしましょう。  
 例えば、あなたのアプリのみがアクセスできて十分であるならば、[Context.getFilesDir()](https://developer.android.com/reference/android/content/Context#getFilesDir())を使いましょう。
-```bash
+```console
 /data/data/[package_name]/files/
 ```
 配下に保存されます。  
 Adbコマンドからも取り扱いたい、大きめのファイルを保存したいならば、[Context.getExternalFilesDir()](https://developer.android.com/reference/android/content/Context#getExternalFilesDir(java.lang.String)) を使いましょう。
-```bash
+```console
 /sdcard/Android/data/[package_name]/files/
 ```
 配下に保存されます。  

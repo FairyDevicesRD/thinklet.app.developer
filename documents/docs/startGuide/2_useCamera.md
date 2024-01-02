@@ -72,13 +72,15 @@ THINKLETにプリインストールしているカメラアプリを起動し、
    - adbコマンドの設定は、[adb設定](./3_helloworld.md#adb設定)を参照ください。
    - THINKLETに保存されているファイルをadbコマンドで取り出します。  
    adbコマンドが正しく実行できない場合はパスが通っていない可能性があります。
-    ```
+    ```console
     # 1. 撮影したファイル名を取得します
+    // highlight-next-line
     $ adb shell ls /sdcard/DCIM/Camera/
     VID_20230907_175942.mp4
     ```
 
     # 2. 撮影したファイルを取り出します。
+    // highlight-next-line
     $ adb pull /sdcard/DCIM/Camera/VID_20230907_175942.mp4 /path/to/save_dir/
     /sdcard/DCIM/Camera/VID_20230907_175942.mp4: 1 file pulled, 0 skipped. 10.8 MB/s (41748967 bytes in 3.704s)
     ```
