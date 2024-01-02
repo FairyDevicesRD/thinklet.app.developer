@@ -75,7 +75,10 @@ Keyとvalueの対応は下記のようになっています。
 | key-event  | String     | `first-pressed`, `single-released`, `double-pressed`, `double-released`, `long-pressed`, `long-released` のいずれか。[※1](#※1キーイベントと実際の動作の対応は下記の通りです) |
 | key-action | JSONObject | キー・イベントに応じたアクションをまとめた JSON Object                                                                                                                       |
 
-![](./img/hw/l.jpg)
+<img
+  src={require('./img/hw/l.jpg').default}
+  style={{ width: '500px', margin: '20px'}}
+/>
 
 #### ※1:キーイベントと実際の動作の対応は下記の通りです
 | key-event       | 実際の動作                                                                                                                    |

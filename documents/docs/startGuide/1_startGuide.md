@@ -25,7 +25,11 @@ tags:
 - なお、[LINKLET](https://linklet.ai/) としてご利用頂いているTHINKLETは、開発機としてはご利用できません。
 
 ## THINKLETとは
-![](./img/hw/tl.jpg)
+
+<img
+  src={require('./img/hw/tl.jpg').default}
+  style={{ width: '500px', margin: '20px'}}
+/>
 
 [THINKLET](https://mimi.fairydevices.jp/technology/device/thinklet/)は、Fairy Devicesが開発したLTE/Wi-Fi搭載の首掛け型ウェアラブルデバイスです。  
 5つのマイクと1つの広角カメラ、各種センサーを内蔵、  
@@ -55,6 +59,17 @@ OSには、AOSP(Android Open Source Project) をベースとしたFairy OSを開
 - KEYCODE_POWER は、Androidでは電源ボタンのキーイベントを指します。
 :::
 
-![](./img/hw/l.jpg)
-![](./img/hw/d.jpg)
-![](./img/hw/up.jpg)
+<img
+  src={require('./img/hw/l.jpg').default}
+  style={{ width: '500px', margin: '20px'}}
+/>
+
+<img
+  src={require('./img/hw/d.jpg').default}
+  style={{ width: '500px', margin: '20px'}}
+/>
+
+<img
+  src={require('./img/hw/up.jpg').default}
+  style={{ width: '500px', margin: '20px'}}
+/>

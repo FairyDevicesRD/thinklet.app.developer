@@ -146,9 +146,23 @@ rawファイルが生成されていれば、録音できています。
   - （soxコマンドなどが扱える方はそちらでも構いません）
 - Audacityをインストールしたら、Audacityを起動します。
 - 起動したら、`ファイル -> 取り込み -> ロー(Raw)データの取り込み` を選択します。
-  - ![1](./img/audacity/1.jpg)
+
+  <img
+    src={require('./img/audacity/1.jpg').default}
+    style={{ width: '500px', margin: '20px'}}
+  />
+
 - adbで取り出したRawファイルを選択します。
 - 録音したRawデータの設定をAudacityに教えます。今回は、チャンネル数は6、サンプリングレートは`48,000 Hz`ですので以下のように設定し、取り込みを選択します。
-  - ![2](./img/audacity/2.jpg)
+
+  <img
+    src={require('./img/audacity/2.jpg').default}
+    style={{ width: '500px', margin: '20px'}}
+  />
+
 - 取り込みできると、以下のような画面になります。左上の再生ボタンから再生できます。
-  - ![3](./img/audacity/3.jpg)
+
+  <img
+    src={require('./img/audacity/3.jpg').default}
+    style={{ width: '500px', margin: '20px'}}
+  />

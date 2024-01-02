@@ -31,7 +31,10 @@ THINKLETにはディスプレイは搭載されていません。
    - `scrcpy` (Windowsであれば、`scrcpy.exe`) を実行します。
    - 下記のような画面がPC上に表示されれば、正しくTHINKLETと接続や、scrcpyのインストールができています。
   
-  ![](./img/launcher/home.jpg)
+    <img
+      src={require('./img/launcher/home.jpg').default}
+      style={{ width: '300px', margin: '20px'}}
+    />
 
 :::info
 
@@ -53,19 +56,41 @@ scrcpyは、adb経由でミラーリングを行っています。
 THINKLETにプリインストールしているカメラアプリを起動し、写真や動画を撮影してみましょう。
 
 1. scrcpyを用いて、THINKLETの開発者画面を操作して、`Snapdragon Camera` アプリを起動します。
-  ![](img/snapdragon/home.jpg)
+
+  <img
+    src={require('./img/launcher/home.jpg').default}
+    style={{ width: '300px', margin: '20px'}}
+  />
+
 2. このアプリは、画面右下から写真撮影、動画撮影モードを切り替えることができます。
-  ![](img/snapdragon/choose.jpg)
+
+  <img
+    src={require('./img/snapdragon/choose.jpg').default}
+    style={{ width: '300px', margin: '20px'}}
+  />
+
 3. 画面下部の撮影ボタンや録画開始ボタンで、写真撮影、録画開始/停止をできます。
-  ![](img/snapdragon/startRecord.jpg)
-  ![](img/snapdragon/recorrding.jpg)
+
+  <img
+    src={require('./img/snapdragon/startRecord.jpg').default}
+    style={{ width: '300px', margin: '20px'}}
+  />
+
+  <img
+    src={require('./img/snapdragon/recorrding.jpg').default}
+    style={{ width: '300px', margin: '20px'}}
+  />
 
 ## 撮影した映像を再生
 [前項](#カメラアプリを試す)で撮影した動画を再生してみましょう。
 
 1. scrcpy上で確認する
    - `Snapdragon Camera` アプリの画面左下のサムネイルから再生アプリを起動できます。
-   ![](img/snapdragon/recorded.jpg)
+
+    <img
+      src={require('./img/snapdragon/recorded.jpg').default}
+      style={{ width: '300px', margin: '20px'}}
+    />
 
 2. PC上で確認する
    - adbコマンドで取得します。少し前後してしまいますので、飛ばして構いません。
