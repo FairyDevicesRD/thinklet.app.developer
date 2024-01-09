@@ -16,7 +16,7 @@ THINKLETにはディスプレイは搭載されていません。
    - 振動するまで電源ボタンを長押しをしてください。
    - 日本語音声で「電源をつけました」、または英語音声で「Power On」とアナウンスされたら起動完了です。
 2. PCとTHINKLETをUSBケーブルで接続する
-   - THINKLETのUSB Type-C ポートは、充電とデータ通信を兼用しています。
+   - THINKLETのUSB Type-Cポートは、充電とデータ通信を兼用しています。
    - 接続に用いるUSBケーブルは、データ通信対応のものを使用します。
 3. PCに [scrcpy](https://github.com/Genymobile/scrcpy) をインストールします
    - `scrcpy` は、Genymobile社が提供する`adb`を用いて、Androidデバイスの画面をPCにミラーリングするソフトウェアです。  

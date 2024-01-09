@@ -26,10 +26,11 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
 - [Creating a personal access token (classic)](https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic) に従い、アクセストークン（以下、トークン）を発行します。トークンのスコープには、`read:packages` が必要です。
   - トークンは、パスワードと同様の扱いとしてください。
   - GithubPackagesについては、[こちら](https://docs.github.com/ja/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries) も参照ください。
-  - トークンには、`Fine-grained personal access tokens` もありますが、執筆時点では、Github Packagesが `personal access token (classic)` のみをサポートしています。
+  - 執筆時点では、Github Packagesは `personal access token (classic)` のみをサポートしています。
+  - `Fine-grained personal access tokens` はサポートされていません。
 ### アクセストークンを設定
 - 発行したトークンなどを、作成した `com.example.fd.multichannelaudiorecorder`（または任意のプロジェクト名）に設定していきます。
-- プロジェクト直下の `settings.gradle` または， `settings.gradle.kts` ファイルに以下を追記します。これにより、ビルドシステムが必要なライブラリを見つけられるようになります。
+- プロジェクト直下の `settings.gradle` または、`settings.gradle.kts` ファイルに以下を追記します。これにより、ビルドシステムが必要なライブラリを見つけられるようになります。
   <Tabs>
     <TabItem value="Groovy" label="Groovy(.gradle)">
     ```gradle
@@ -126,7 +127,7 @@ Android向けのライブラリである`AAR`には、`AndroidManifest.xml`が�
 ## マルチマイク録音クラスの実装
 - `app/src/main/java/com/example/fd/multichannelaudiorecorder/MainActivity.kt` と同じディレクトリに、  
 `app/src/main/java/com/example/fd/multichannelaudiorecorder/FiveChannelRecorder.kt` を作成し、記述していきます。
-- 記述する内容は、実装済みの <FiveChannelRecorder /> をコピペしてください。
+- 記述する内容は、実装済みの <FiveChannelRecorder /> をコピー&ペーストしてください。
   - なお、パッケージ名を変えている場合は適宜変更してください。
 ## 起動で録音開始、終了で録音終了
 - `app/src/main/java/com/example/fd/multichannelaudiorecorder/MainActivity.kt` が起動したら、  
@@ -184,7 +185,7 @@ rawファイルが生成されていれば、録音できています。
   $ adb pull /sdcard/Android/data/com.example.fd.multichannelaudiorecorder/files/6ch_48kHz_2023-09-11-22-33-44.raw /path/to/save_dir/
   ```
 - Rawファイルの再生には、[Audacity](https://www.audacityteam.org/) を使用します。
-  - （soxコマンドなどが扱える方はそちらでも構いません）
+  - soxコマンドなどが扱える方はそちらでも構いません。
 - Audacityをインストールしたら、Audacityを起動します。
 - 起動したら、`ファイル -> 取り込み -> ロー(Raw)データの取り込み` を選択します。
 
