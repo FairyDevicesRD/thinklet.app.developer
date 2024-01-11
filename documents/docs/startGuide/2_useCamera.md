@@ -102,7 +102,6 @@ THINKLETにプリインストールしているカメラアプリを起動し、
     // highlight-next-line
     $ adb shell ls /sdcard/DCIM/Camera/
     VID_20230907_175942.mp4
-    ```
 
     # 2. 撮影したファイルを取り出します。
     // highlight-next-line
