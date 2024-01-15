@@ -3,7 +3,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'THINKLET App Developer',
+  title: 'THINKLET開発者ポータル',
   tagline: 'Get started with THINKLET',
   favicon: 'img/favicon.ico',
 
@@ -87,7 +87,7 @@ const config = {
                 to: '/docs/intro',
               },
               {
-                label: 'Operator Manual',
+                label: 'THINKLET LC-01 取扱説明書',
                 href: 'https://static-connected-worker.thinklet.fd.ai/support/ja/',
               },
               {
