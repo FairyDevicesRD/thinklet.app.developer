@@ -21,7 +21,7 @@ const sidebars = {
     'intro',
     {
       type: 'category',
-      label: 'スタートガイド',
+      label: 'startGuide',
       items: [
         'startGuide/startGuide',
         'startGuide/useCamera',
@@ -33,7 +33,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'ガイドライン',
+      label: 'guidelines',
       items: [
         'devGuide/devGuide',
       ],

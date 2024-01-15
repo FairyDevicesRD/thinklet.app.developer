@@ -3,7 +3,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'THINKLET開発者ポータル',
+  title: 'THINKLET App Developer',
   tagline: 'Get started with THINKLET',
   favicon: 'img/favicon.ico',
 
@@ -20,8 +20,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'jp',
-    locales: ['jp'],
+    defaultLocale: 'ja',
+    locales: ['ja'],
   },
 
   markdown: {
@@ -87,7 +87,7 @@ const config = {
                 to: '/docs/intro',
               },
               {
-                label: 'THINKLET LC-01 取扱説明書',
+                label: 'Operator Manual LC-01',
                 href: 'https://static-connected-worker.thinklet.fd.ai/support/ja/',
               },
               {
