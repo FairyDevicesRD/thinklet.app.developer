@@ -16,7 +16,7 @@ function HomepageHeader() {
         <h1 className="hero__title">
           <Translate
             id="homepage.title"
-            description="homepage title"></Translate>
+            description="homepage title">{siteConfig.title}</Translate>
         </h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
