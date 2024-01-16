@@ -21,7 +21,7 @@ const sidebars = {
     'intro',
     {
       type: 'category',
-      label: 'startGuide',
+      label: 'StartGuide',
       items: [
         'startGuide/startGuide',
         'startGuide/useCamera',
