@@ -33,7 +33,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'guidelines',
+      label: 'Guidelines',
       items: [
         'devGuide/devGuide',
       ],
