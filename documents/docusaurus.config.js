@@ -20,8 +20,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'jp',
-    locales: ['jp'],
+    defaultLocale: 'ja',
+    locales: ['ja'],
   },
 
   markdown: {
@@ -87,7 +87,7 @@ const config = {
                 to: '/docs/intro',
               },
               {
-                label: 'Operator Manual',
+                label: 'Operator Manual LC-01',
                 href: 'https://static-connected-worker.thinklet.fd.ai/support/ja/',
               },
               {

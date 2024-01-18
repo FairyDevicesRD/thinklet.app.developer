@@ -1,0 +1,46 @@
+{
+  "link.title.Docs": {
+    "message": "Docs",
+    "description": "The title of the footer links column with title=Docs in the footer"
+  },
+  "link.title.SDK": {
+    "message": "SDK",
+    "description": "The title of the footer links column with title=SDK in the footer"
+  },
+  "link.title.Link": {
+    "message": "Link",
+    "description": "The title of the footer links column with title=Link in the footer"
+  },
+  "link.item.label.Tutorial": {
+    "message": "Tutorial",
+    "description": "The label of footer link with label=Tutorial linking to /docs/intro"
+  },
+  "link.item.label.Operator Manual LC-01": {
+    "message": "THINKLET LC-01 取扱説明書",
+    "description": "The label of footer link with label=Operator Manual LC-01 linking to https://static-connected-worker.thinklet.fd.ai/support/ja/"
+  },
+  "link.item.label.Software Licenses": {
+    "message": "Software Licenses",
+    "description": "The label of footer link with label=Software Licenses linking to https://oss-license.developer.thinklet.fd.ai/"
+  },
+  "link.item.label.App SDK": {
+    "message": "App SDK",
+    "description": "The label of footer link with label=App SDK linking to https://github.com/FairyDevicesRD/thinklet.app.sdk"
+  },
+  "link.item.label.FairyDevices": {
+    "message": "FairyDevices",
+    "description": "The label of footer link with label=FairyDevices linking to https://fairydevices.jp"
+  },
+  "link.item.label.Zenn": {
+    "message": "Zenn",
+    "description": "The label of footer link with label=Zenn linking to https://zenn.dev/p/fairydevices"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/FairyDevicesRD"
+  },
+  "copyright": {
+    "message": "Copyright © 2024 Fairy Devices Inc. All rights reserved.",
+    "description": "The footer copyright"
+  }
+}

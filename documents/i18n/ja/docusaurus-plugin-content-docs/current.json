@@ -1,0 +1,14 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.startGuide": {
+    "message": "スタートガイド",
+    "description": "The label for category startGuide in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.guidelines": {
+    "message": "ガイドライン",
+    "description": "The label for category guidelines in sidebar tutorialSidebar"
+  }
+}
