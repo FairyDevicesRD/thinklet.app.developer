@@ -3,11 +3,11 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.startGuide": {
+  "sidebar.tutorialSidebar.category.StartGuide": {
     "message": "スタートガイド",
     "description": "The label for category startGuide in sidebar tutorialSidebar"
   },
-  "sidebar.tutorialSidebar.category.guidelines": {
+  "sidebar.tutorialSidebar.category.Guidelines": {
     "message": "ガイドライン",
     "description": "The label for category guidelines in sidebar tutorialSidebar"
   }
