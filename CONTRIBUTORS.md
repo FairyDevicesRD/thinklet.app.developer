@@ -9,3 +9,4 @@
 | Kouki Miyazawa (FairyDevices)    | https://github.com/miyazawa-kouki        | Document Reviewer                        |
 | Satoshi Yoshikawa (FairyDevices) | https://github.com/emergent              | Document Writer, Document Reviewer       |
 | Michika Ishihara (FairyDevices)  | https://github.com/Ishihara-fairydevices | Document Reviewer                        |
+| Tamaki Hidetsugu                 | https://github.com/r-ralph               | Document Reviewer                        |
