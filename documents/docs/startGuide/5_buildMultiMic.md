@@ -65,11 +65,15 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
             google()
             mavenCentral()
     // highlight-start
-    +       credentials {
-    +           val properties = java.util.Properties()
-    +           properties.load(file("github.properties").inputStream())
-    +           username = properties.getProperty("username") ?: ""
-    +           password = properties.getProperty("token") ?: ""
+    +       maven {
+    +           name = "GitHubPackages"
+    +           setUrl("https://maven.pkg.github.com/FairyDevicesRD/thinklet.app.sdk")
+    +           credentials {
+    +               val properties = java.util.Properties()
+    +               properties.load(file("github.properties").inputStream())
+    +               username = properties.getProperty("username") ?: ""
+    +               password = properties.getProperty("token") ?: ""
+    +           }
     +       }
     // highlight-end
         }
