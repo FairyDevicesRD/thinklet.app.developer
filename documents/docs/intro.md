@@ -12,6 +12,11 @@ THINKLET向けのアプリ開発をするために役に立つ情報がありま
 ### 概要
 - THINKLET向けアプリ開発における、注意すべきことを紹介します。
 - THINKLETの開発固有のポリシーに加え、一般のAndroidアプリに共通する内容も含まれます。
+## [THINKLETを使ってできること](./expert/sampleProject.md)
+### 対象者
+- Androidアプリの開発経験が一定以上ある方
+### 概要
+- THINKLETを用いたサンプルアプリなどを紹介します。
 ## [キーコンフィグ](./keyConfig/keyConfig.md)
 ### 対象者
 - Androidアプリの開発経験が一定以上ある方
