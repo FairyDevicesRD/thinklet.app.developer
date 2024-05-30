@@ -38,6 +38,7 @@ const sidebars = {
         'devGuide/devGuide',
       ],
     },
+    "expert/sampleProject",
     "keyConfig/keyConfig",
     "systemUpdate/systemUpdate",
     'troubleshooting/troubleshooting',
