@@ -35,7 +35,8 @@ const sidebars = {
       type: 'category',
       label: 'Guidelines',
       items: [
-        'devGuide/devGuide',
+        'devGuide/thinklet',
+        'devGuide/thinkletCube',
       ],
     },
     "expert/sampleProject",

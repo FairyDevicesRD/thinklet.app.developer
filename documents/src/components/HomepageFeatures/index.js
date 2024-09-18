@@ -1,11 +1,11 @@
-import React from 'react';
-import clsx from 'clsx';
-import styles from './styles.module.css';
+import React from "react";
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 const FeatureList = [
   {
-    title: 'Androidとの互換性',
-    Svg: require('@site/static/img/undraw_android_jr64.svg').default,
+    title: "Androidとの互換性",
+    Svg: require("@site/static/img/undraw_android_jr64.svg").default,
     description: (
       <>
         THINKLETは、Android SDKと互換性があります。
@@ -14,8 +14,9 @@ const FeatureList = [
     ),
   },
   {
-    title: 'THINKLET独自機能を提供するSDK',
-    Svg: require('@site/static/img/undraw_developer_activity_re_39tg.svg').default,
+    title: "THINKLET独自機能を提供するSDK",
+    Svg: require("@site/static/img/undraw_developer_activity_re_39tg.svg")
+      .default,
     description: (
       <>
         THINKLET固有の機能を利用できる専用SDKを提供しています。
@@ -24,11 +25,13 @@ const FeatureList = [
     ),
   },
   {
-    title: '単体で通信',
-    Svg: require('@site/static/img/undraw_internet_on_the_go_re_vben.svg').default,
+    title: "単体で通信",
+    Svg: require("@site/static/img/undraw_internet_on_the_go_re_vben.svg")
+      .default,
     description: (
       <>
-        THINKLETは、Wi-Fiはもちろん、<code>nanoSIM</code> を使ったLTE通信が可能なセルラーモデルです。
+        THINKLETは、Wi-Fiはもちろん、<code>nanoSIM</code>{" "}
+        を使ったLTE通信が可能なセルラーモデルです。
         他のデバイスや専用アプリ経由を使ったネットワーク接続は不要です。THINKLET単体で通信します。
       </>
     ),
@@ -37,7 +40,7 @@ const FeatureList = [
 
 function Feature({ Svg, title, description }) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx("col col--4")}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
       </div>

@@ -2,5 +2,13 @@
   "homepage.title": {
     "message": "THINKLET開発者ポータル",
     "description": "This homepage title"
+  },
+  "homepage.usage": {
+    "message": "THINKLETを使って何ができますか？",
+    "description": "This homepage usege"
+  },
+  "homepage.usage.description": {
+    "message": "THINKLETならではのアプリケーションをオープンソースとして公開しています",
+    "description": "This homepage usege description"
   }
 }
