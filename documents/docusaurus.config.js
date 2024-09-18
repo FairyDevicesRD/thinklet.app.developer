@@ -91,6 +91,10 @@ const config = {
                 href: 'https://static-connected-worker.thinklet.fd.ai/support/ja/',
               },
               {
+                label: 'Operator Manual LC-02',
+                href: 'https://static-connected-worker.thinklet.fd.ai/support/tl-cube/ja/',
+              },
+              {
                 label: 'Software Licenses',
                 href: 'https://oss-license.developer.thinklet.fd.ai/',
               },

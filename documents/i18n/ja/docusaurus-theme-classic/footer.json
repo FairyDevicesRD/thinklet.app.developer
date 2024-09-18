@@ -17,7 +17,11 @@
   },
   "link.item.label.Operator Manual LC-01": {
     "message": "THINKLET LC-01 取扱説明書",
-    "description": "The label of footer link with label=Operator Manual LC-01 linking to https://static-connected-worker.thinklet.fd.ai/support/ja/"
+    "description": "The label of footer link with label=Operator Manual THINKLET linking to https://static-connected-worker.thinklet.fd.ai/support/ja/"
+  },
+  "link.item.label.Operator Manual LC-02": {
+    "message": "THINKLET cube LC-02 取扱説明書",
+    "description": "The label of footer link with label=Operator Manual THINKLET cube linking to https://static-connected-worker.thinklet.fd.ai/support/tl-cube/ja/"
   },
   "link.item.label.Software Licenses": {
     "message": "Software Licenses",
