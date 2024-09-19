@@ -18,31 +18,28 @@ const sidebars = {
 
   // But you can create a sidebar manually
   tutorialSidebar: [
-    'intro',
+    "intro",
     {
-      type: 'category',
-      label: 'StartGuide',
+      type: "category",
+      label: "StartGuide",
       items: [
-        'startGuide/startGuide',
-        'startGuide/useCamera',
-        'startGuide/helloworld',
-        'startGuide/buildRecord',
-        'startGuide/buildMultiMic',
-        'startGuide/buildKeyConfig',
+        "startGuide/startGuide",
+        "startGuide/useCamera",
+        "startGuide/helloworld",
+        "startGuide/buildRecord",
+        "startGuide/buildMultiMic",
+        "startGuide/buildKeyConfig",
       ],
     },
     {
-      type: 'category',
-      label: 'Guidelines',
-      items: [
-        'devGuide/thinklet',
-        'devGuide/thinkletCube',
-      ],
+      type: "category",
+      label: "Guidelines",
+      items: ["devGuide/thinklet", "devGuide/thinkletCube"],
     },
     "expert/sampleProject",
     "keyConfig/keyConfig",
     "systemUpdate/systemUpdate",
-    'troubleshooting/troubleshooting',
+    "troubleshooting/troubleshooting",
   ],
 };
 
