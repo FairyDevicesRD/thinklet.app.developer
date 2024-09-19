@@ -95,21 +95,21 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
     <TabItem value="Groovy" label="Groovy(.gradle)">
     ```gradle
     dependencies {
-      implementation 'androidx.core:core-ktx:1.8.0'
+      implementation 'androidx.core:core-ktx:1.13.1'
       implementation 'androidx.compose.material3:material3'
       (中略)
     // highlight-next-line
-    + implementation 'ai.fd.thinklet:sdk-audio:0.0.4'
+    + implementation 'ai.fd.thinklet:sdk-audio:0.1.2'
     ```
     </TabItem>
     <TabItem value="Kotlin" label="Kotlin(.gradle.kts)" default>
     ```gradle
     dependencies {
-      implementation("androidx.core:core-ktx:1.8.0")
+      implementation("androidx.core:core-ktx:1.13.1")
       implementation("androidx.compose.material3:material3")
       (中略)
     // highlight-next-line
-    + implementation("ai.fd.thinklet:sdk-audio:0.0.4")
+    + implementation("ai.fd.thinklet:sdk-audio:0.1.2")
     ```
     </TabItem>
   </Tabs>

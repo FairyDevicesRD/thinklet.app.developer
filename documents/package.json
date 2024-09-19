@@ -12,22 +12,25 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "textlint:fix": "textlint --fix"
+    "textlint:fix": "textlint --fix",
+    "prettier-fix": "prettier --write"
   },
   "dependencies": {
-    "@docusaurus/core": "3.3.2",
-    "@docusaurus/preset-classic": "3.3.2",
-    "@docusaurus/theme-mermaid": "3.3.2",
+    "@docusaurus/core": "^3.4.0",
+    "@docusaurus/preset-classic": "^3.4.0",
+    "@docusaurus/theme-mermaid": "^3.4.0",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.1.0",
     "prism-react-renderer": "^2.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-loadable": "^5.5.0"
+    "react-loadable": "^5.5.0",
+    "html-react-parser": "^5.1.10"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.3.2",
-    "@docusaurus/types": "3.3.2",
+    "@docusaurus/module-type-aliases": "^3.4.0",
+    "@docusaurus/types": "^3.4.0",
+    "prettier": "^3.3.3",
     "textlint": "^13.3.3",
     "textlint-rule-preset-ja-technical-writing": "^8.0.0",
     "textlint-rule-preset-jtf-style": "^2.3.13",
