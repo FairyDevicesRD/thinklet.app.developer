@@ -5,6 +5,29 @@ tags:
 ---
 
 # はじめに
+
+import parse from 'html-react-parser';
+
+export const button_explanation_word_list_thinklet = [
+  "(1) `KEYCODE_VOLUME_DOWN` がアサインされたボタン",
+  "(2) `KEYCODE_CAMERA` がアサインされたボタン",
+  "(3) `KEYCODE_VOLUME_UP` がアサインされたボタン",
+  "(4) `KEYCODE_POWER` がアサインされたボタン。常に短押しでHomeに戻る動作をします",
+  "(5) 5つのマイク",
+  "(6) 広角カメラ",
+  "(7) ジェスチャーセンサー（ハンドジェスチャー用）",
+];
+export const button_explanation_word_list_thinklet_cube = [
+  "(1) `KEYCODE_VOLUME_DOWN` がアサインされたボタン",
+  "(2) `KEYCODE_CAMERA` がアサインされたボタン",
+  "(3) `KEYCODE_VOLUME_UP` がアサインされたボタン",
+  "(4) `KEYCODE_POWER` がアサインされたボタン。常に短押しでHomeに戻る動作をします",
+  "(5) 5つのマイク",
+  "(6) 広角カメラ",
+];
+export const button_explanation_word_thinklet = button_explanation_word_list_thinklet.join('<br />');
+export const button_explanation_word_thinklet_cube = button_explanation_word_list_thinklet_cube.join('<br />');
+
 ## 前提として
 - THINKLETアプリ開発には、Android Studioとそれを動作させるPCが必要です。
 - THINKLETアプリ開発には、`adb` 接続が必須です。
@@ -27,7 +50,7 @@ tags:
 ## THINKLETとは
 
 <img
-  src={require('./img/hw/tl.jpg').default}
+  src={require('./img/hw/lc-01/tl.jpg').default}
   style={{ width: '500px', margin: '20px'}}
 />
 
@@ -42,16 +65,6 @@ OSには、AOSP(Android Open Source Project) をベースとしたFairy OSを開
 - THINKLETに組み込まれているボタンなどの位置について説明します。
   - [参考: developer.android.com #KeyEvent](https://developer.android.com/reference/android/view/KeyEvent)
 
-```
-(1) `KEYCODE_VOLUME_DOWN` がアサインされたボタン
-(2) `KEYCODE_CAMERA` がアサインされたボタン
-(3) `KEYCODE_VOLUME_UP` がアサインされたボタン
-(4) `KEYCODE_POWER` がアサインされたボタン。常に短押しでHomeに戻る動作をします
-(5) 5つのマイク
-(6) 広角カメラ
-(7) ジェスチャーセンサー（ハンドジェスチャー用）
-```
-
 :::tip
 - `KEYCODE_VOLUME_DOWN` は、Androidでは音量を下げるキーイベントを指します。
 - `KEYCODE_VOLUME_UP` は、Androidでは音量を上げるキーイベントを指します。
@@ -59,17 +72,10 @@ OSには、AOSP(Android Open Source Project) をベースとしたFairy OSを開
 - `KEYCODE_POWER` は、Androidでは電源ボタンのキーイベントを指します。
 :::
 
-<img
-  src={require('./img/hw/l.jpg').default}
-  style={{ width: '500px', margin: '20px'}}
-/>
 
-<img
-  src={require('./img/hw/d.jpg').default}
-  style={{ width: '500px', margin: '20px'}}
-/>
-
-<img
-  src={require('./img/hw/up.jpg').default}
-  style={{ width: '500px', margin: '20px'}}
-/>
+| THINKLET | THINKLET cube |
+| ---------- | ---------- |
+|{parse(button_explanation_word_thinklet)}|{parse(button_explanation_word_thinklet_cube)}|
+| <img src={require('./img/hw/lc-01/l.jpg').default} style={{ width: '500px'}}/> | <img src={require('./img/hw/lc-02/b.jpg').default} style={{ width: '500px'}} /> |
+| <img src={require('./img/hw/lc-01/d.jpg').default} style={{ width: '500px'}} /> | <img src={require('./img/hw/lc-02/d.jpg').default} style={{ width: '500px'}} /> |
+| <img src={require('./img/hw/lc-01/up.jpg').default} style={{ width: '500px'}} /> | <img src={require('./img/hw/lc-02/f.jpg').default} style={{ width: '500px'}} /> |

@@ -27,11 +27,11 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
     <TabItem value="Groovy" label="Groovy(.gradle)">
     ```gradle
     dependencies {
-        implementation 'androidx.core:core-ktx:1.8.0'
-        implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+        implementation 'androidx.core:core-ktx:1.13.1'
+        implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.4'
         (中略)
     // highlight-start
-    +   def cameraX = "1.2.3"
+    +   def cameraX = "1.3.4"
     +   implementation "androidx.camera:camera-video:$cameraX"
     +   implementation "androidx.camera:camera-lifecycle:$cameraX"
     +   implementation "androidx.camera:camera-camera2:$cameraX"
@@ -41,11 +41,11 @@ import {SampleVideoRecorderRoot, VideoRecorder} from '../_links.js'
     <TabItem value="Kotlin" label="Kotlin(.gradle.kts)" default>
     ```gradle
     dependencies {
-        implementation("androidx.core:core-ktx:1.8.0")
-        implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+        implementation("androidx.core:core-ktx:1.13.1")
+        implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
         (中略)
     // highlight-start
-    +   val cameraX = "1.2.3"
+    +   val cameraX = "1.3.4"
     +   implementation("androidx.camera:camera-video:$cameraX")
     +   implementation("androidx.camera:camera-lifecycle:$cameraX")
     +   implementation("androidx.camera:camera-camera2:$cameraX")
