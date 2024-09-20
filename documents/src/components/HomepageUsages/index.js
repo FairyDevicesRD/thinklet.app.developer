@@ -25,7 +25,7 @@ export default function HomepageUsages() {
             description="homepage usage"
           />
         </h3>
-        <div>
+        <div className={clsx(styles.usageTableBox)}>
           <table className={clsx(styles.usageTable)}>
             <thead>
               <tr>
