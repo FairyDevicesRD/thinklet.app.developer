@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.usageTableBox {
+  overflow-x: auto;
+}
+
 .usageTable {
   width: 100%;
   border: none;
