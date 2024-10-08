@@ -95,7 +95,19 @@ function GhRepository({ owner }) {
           </a>
         </td>
         <td>{new Date(item.pushed_at).toLocaleDateString()}</td>
-        <td>{item.license?.name ?? "N/A"}</td>
+        <td>{convertLicense(item)}</td>
       </tr>
     ));
+}
+
+function convertLicense(item) {
+  if (item.license?.name == null || item.license?.url == null) {
+    return (
+      <a href={item.html_url} target="_blank" rel="noopener noreferrer">
+        See Repository
+      </a>
+    );
+  } else {
+    return item.license.name;
+  }
 }
