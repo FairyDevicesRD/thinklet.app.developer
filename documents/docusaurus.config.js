@@ -88,11 +88,11 @@ const config = {
               },
               {
                 label: 'Operator Manual LC-01',
-                href: 'https://static-connected-worker.thinklet.fd.ai/support/ja/',
+                href: 'https://static-connected-worker.thinklet.fd.ai/support/ja/index.html',
               },
               {
                 label: 'Operator Manual LC-02',
-                href: 'https://static-connected-worker.thinklet.fd.ai/support/tl-cube/ja/',
+                href: 'https://static-connected-worker.thinklet.fd.ai/support/tl-cube/ja/index.html',
               },
               {
                 label: 'Software Licenses',
