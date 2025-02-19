@@ -36,7 +36,6 @@ const sidebars = {
       label: "Guidelines",
       items: ["devGuide/thinklet", "devGuide/thinkletCube"],
     },
-    "expert/sampleProject",
     "keyConfig/keyConfig",
     "systemUpdate/systemUpdate",
     "troubleshooting/troubleshooting",
