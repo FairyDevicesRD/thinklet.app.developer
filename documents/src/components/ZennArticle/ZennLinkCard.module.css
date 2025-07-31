@@ -1,0 +1,112 @@
+.linkCard {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.linkCard:hover {
+  text-decoration: none;
+  color: inherit;
+  border-color: #3182ce;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.articleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.cardContent {
+  height: 100%;
+}
+
+.title {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+  color: #2d3748;
+}
+
+.description {
+  font-size: 0.9em;
+  color: #4a5568;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8em;
+  color: #718096;
+  margin-bottom: 8px;
+}
+
+.author {
+  font-weight: 500;
+}
+
+.date {
+  font-style: italic;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.category {
+  background: #e2e8f0;
+  color: #4a5568;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 500;
+}
+
+/* ダークモード対応 */
+[data-theme='dark'] .linkCard {
+  background: #2d3748;
+  border-color: #4a5568;
+}
+
+[data-theme='dark'] .linkCard:hover {
+  border-color: #63b3ed;
+}
+
+[data-theme='dark'] .title {
+  color: #e2e8f0;
+}
+
+[data-theme='dark'] .description {
+  color: #a0aec0;
+}
+
+[data-theme='dark'] .meta {
+  color: #718096;
+}
+
+[data-theme='dark'] .category {
+  background: #4a5568;
+  color: #e2e8f0;
+}
+
+.usageBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}

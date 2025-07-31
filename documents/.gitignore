@@ -3,6 +3,7 @@
 
 # Production
 /build
+zennArticleList.js
 
 # Generated files
 .docusaurus
@@ -18,4 +19,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
