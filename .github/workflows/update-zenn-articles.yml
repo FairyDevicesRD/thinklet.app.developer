@@ -1,0 +1,112 @@
+name: Deploy GitHub Pages When Zenn Articles Change
+
+on:
+  # schedule:
+  # 毎日9時に実行 (JST)
+  # - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-zenn-update-and-deploy:
+    name: Check Zenn Articles Update and Deploy
+    runs-on: ubuntu-latest
+    outputs:
+      has-changes: ${{ steps.diff-check.outputs.has-changes }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install dependencies
+        run: bun install
+        working-directory: ./documents
+
+      - name: Restore previous Zenn articles data from cache
+        id: cache-zenn
+        uses: actions/cache/restore@v3
+        with:
+          path: ./documents/src/utils/zennArticleList.js
+          key: zennArticleList-${{ github.repository }}
+          restore-keys: |
+            zennArticleList-
+
+      - name: Prepare previous Zenn articles data
+        run: |
+          if [ -f "src/utils/zennArticleList.js" ]; then
+            echo "Previous Zenn articles data restored from cache"
+            mv src/utils/zennArticleList.js previous-zennArticleList.js
+          else
+            echo "{}" > previous-zennArticleList.js
+            echo "No previous Zenn articles data found, created empty JavaScript file"
+          fi
+        working-directory: ./documents
+
+      - name: Fetch Zenn articles
+        run: bun run fetch-zenn-articles
+        working-directory: ./documents
+
+      - name: Check for differences
+        id: diff-check
+        run: |
+          if ! cmp -s "src/utils/zennArticleList.js" "previous-zennArticleList.js"; then
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+            echo "Zenn articles have changes, deployment needed"
+          else
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            echo "No changes in Zenn articles, skipping deployment"
+          fi
+        working-directory: ./documents
+
+      - name: Build website
+        if: steps.diff-check.outputs.has-changes == 'true'
+        run: bun run build
+        working-directory: ./documents
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.diff-check.outputs.has-changes == 'true'
+        with:
+          path: ./documents/build
+
+      - name: Save current Zenn articles data to cache
+        if: steps.diff-check.outputs.has-changes == 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: ./documents/src/utils/zennArticleList.js
+          key: zennArticleList-${{ github.repository }}-${{ github.run_id }}
+
+      - name: Update cache key for next run
+        if: steps.diff-check.outputs.has-changes == 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: ./documents/src/utils/zennArticleList.js
+          key: zennArticleList-${{ github.repository }}
+
+  deploy:
+    name: Deploy
+    needs: [check-zenn-update-and-deploy]
+    if: needs.check-zenn-update-and-deploy.outputs.has-changes == 'true'
+    permissions:
+      pages: write
+      id-token: write
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        run: echo "Dry Run Deploying to GitHub Pages!"
+        # uses: actions/deploy-pages@v4
+
+      - name: Notify deployment
+        if: needs.check-zenn-update-and-deploy.outputs.has-changes == 'true'
+        run: |
+          echo "Static site deployed successfully due to Zenn articles changes"
+
+      - name: No changes notification
+        if: needs.check-zenn-update-and-deploy.outputs.has-changes == 'false'
+        run: |
+          echo "No deployment needed - Zenn articles unchanged"

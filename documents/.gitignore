@@ -3,11 +3,11 @@
 
 # Production
 /build
-zennArticleList.js
 
 # Generated files
 .docusaurus
 .cache-loader
+zennArticleList.js
 
 # Misc
 .DS_Store
