@@ -18,6 +18,11 @@ jobs:
         run: bun install
         working-directory: ./documents
 
+      - name: Fetch Zenn articles
+        run: |
+          bun run src/utils/fetchZennArticles.js fairydevices
+        working-directory: ./documents
+
       - name: Build website
         run: bun run build
         working-directory: ./documents
