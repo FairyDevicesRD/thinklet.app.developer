@@ -6,7 +6,7 @@ const path = require("path");
 class ZennRSSFetcher {
   constructor(publicationName) {
     this.publicationName = publicationName;
-    this.rssUrl = `https://zenn.dev/p/${publicationName}/feed`;
+    this.rssUrl = `https://zenn.dev/p/${publicationName}/feed?all=1`;
   }
 
   async fetchRSS() {
