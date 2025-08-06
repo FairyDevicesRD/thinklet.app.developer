@@ -40,7 +40,7 @@ export default function HomepageUsages() {
         </div>
         <div className="container">
           <a
-            href="https://github.com/FairyDevicesRD"
+            href="https://github.com/topics/thinklet"
             target="_blank"
             rel="noopener noreferrer"
           >
