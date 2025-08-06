@@ -67,7 +67,7 @@ async function fetchStaticRepositoryData() {
 
   fs.writeFileSync(outputPath, JSON.stringify(allRepos, null, 2));
 
-  console.log(`OG images data saved to ${outputPath}`);
+  console.log(`repository data saved to ${outputPath}`);
 }
 
 fetchStaticRepositoryData().catch((error) => {

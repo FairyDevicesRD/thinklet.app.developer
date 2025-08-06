@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "prebuild": "node src/utils/fetchStaticRepositoryData.js",
+    "fetch-repository": "bun run src/utils/fetchStaticRepositoryData.js",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",

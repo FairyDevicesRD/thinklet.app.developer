@@ -19,7 +19,7 @@ jobs:
         working-directory: ./documents
 
       - name: Fetch static repository data
-        run: bun prebuild
+        run: bun run fetch-repository
         working-directory: ./documents
 
       - name: Build website

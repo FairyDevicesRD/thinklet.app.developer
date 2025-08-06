@@ -64,11 +64,10 @@ function GhRepository({ owner }) {
 
   const hasStaticData =
     Array.isArray(staticRepoData) && staticRepoData.length > 0;
-  console.log("hasStaticData:", hasStaticData);
+
   useEffect(() => {
     // 静的データが存在する場合は、それを使用
     if (hasStaticData) {
-      console.log("Static data:", staticRepoData);
       setRepoData(staticRepoData);
       setLoading(false);
       return;
@@ -103,7 +102,6 @@ function GhRepository({ owner }) {
   return repoData
     .filter((item) => item.topics?.includes("thinklet"))
     .map((item) => {
-      console.log("Repository item:", item);
       const defaultBranch = item.default_branch || "main";
 
       return (
