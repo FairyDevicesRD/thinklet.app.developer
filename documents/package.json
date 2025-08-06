@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "prebuild": "node src/utils/fetchStaticRepositoryData.js",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
@@ -25,7 +26,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-loadable": "^5.5.0",
-    "html-react-parser": "^5.2.2"
+    "html-react-parser": "^5.2.2",
+    "axios": "^1.11.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.7.0",

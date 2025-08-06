@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Translate from "@docusaurus/Translate";
 import { loadFromStorage, setToStorage } from "../../utils/loadFromStorage";
 import { fetchRepositoryData } from "../../utils/fetchRepositoryData";
+import staticRepoData from "../../utils/staticRepoData.json";
 
 import styles from "./styles.module.css";
 
@@ -33,6 +34,7 @@ export default function HomepageUsages() {
                 <th>🔗 URL </th>
                 <th>📅 Last Updated </th>
                 <th>⚖️ LICENSE </th>
+                <th>🖼️ Preview </th>
               </tr>
             </thead>
             <tbody>{OwnerList.map((owner) => GhRepository(owner))}</tbody>
@@ -60,13 +62,27 @@ function GhRepository({ owner }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const hasStaticData =
+    Array.isArray(staticRepoData) && staticRepoData.length > 0;
+  console.log("hasStaticData:", hasStaticData);
   useEffect(() => {
+    // 静的データが存在する場合は、それを使用
+    if (hasStaticData) {
+      console.log("Static data:", staticRepoData);
+      setRepoData(staticRepoData);
+      setLoading(false);
+      return;
+    }
+
+    // 静的データがない場合は、ローカルストレージから取得を試みる
     const cachedData = loadFromStorage(localStorage, cacheKey);
     if (cachedData) {
       setRepoData(cachedData);
       setLoading(false);
       return;
     }
+
+    // ローカルストレージにもない場合は、動的にAPIから取得
     (async () => {
       const { data, error } = await fetchRepositoryData(url);
 
@@ -78,26 +94,48 @@ function GhRepository({ owner }) {
       }
       setLoading(false);
     })();
-  }, [owner]);
+  }, [owner, hasStaticData]);
 
   if (loading) return;
   if (error) return;
   if (!repoData) return;
 
   return repoData
-    .filter((item) => item.topics.includes("thinklet"))
-    .map((item) => (
-      <tr key={item.id}>
-        <td>{item.description}</td>
-        <td>
-          <a href={item.html_url} target="_blank" rel="noopener noreferrer">
-            {item.full_name}
-          </a>
-        </td>
-        <td>{new Date(item.pushed_at).toLocaleDateString()}</td>
-        <td>{convertLicense(item)}</td>
-      </tr>
-    ));
+    .filter((item) => item.topics?.includes("thinklet"))
+    .map((item) => {
+      console.log("Repository item:", item);
+      const defaultBranch = item.default_branch || "main";
+
+      return (
+        <tr key={item.id || item.node_id || item.full_name}>
+          <td>{item.description}</td>
+          <td>
+            <a href={item.html_url} target="_blank" rel="noopener noreferrer">
+              {item.full_name}
+            </a>
+          </td>
+          <td>{new Date(item.pushed_at).toLocaleDateString()}</td>
+          <td>{convertLicense(item)}</td>
+          <td>
+            <a href={item.html_url} target="_blank" rel="noopener noreferrer">
+              <img
+                src={
+                  item.ogImage ||
+                  `https://raw.githubusercontent.com/${item.full_name}/${defaultBranch}/.github/social-preview.png`
+                }
+                alt={`Preview of ${item.name || item.full_name.split("/")[1]}`}
+                className={styles.previewImage}
+                loading="lazy"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = `https://opengraph.githubassets.com/1/${item.full_name}`;
+                }}
+              />
+            </a>
+          </td>
+        </tr>
+      );
+    });
 }
 
 function convertLicense(item) {
