@@ -11,8 +11,10 @@ const ZennLinkCard = ({ article }) => {
       rel="noopener noreferrer"
     >
       <div className={styles.cardContent}>
-        <h3 className={styles.title}>{article.title}</h3>
-        <p className={styles.description}>{article.description}</p>
+        <div className={styles.cardHeader}>
+          <h3 className={styles.title}>{article.title}</h3>
+          <p className={styles.description}>{article.description}</p>
+        </div>
         <div className={styles.meta}>
           <span className={styles.author}>by {article.author}</span>
           <span className={styles.date}>{article.pubDate}</span>
