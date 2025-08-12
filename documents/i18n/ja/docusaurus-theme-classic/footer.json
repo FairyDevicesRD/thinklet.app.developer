@@ -31,6 +31,10 @@
     "message": "App SDK",
     "description": "The label of footer link with label=App SDK linking to https://github.com/FairyDevicesRD/thinklet.app.sdk"
   },
+  "link.item.label.mimi": {
+    "message": "mimi(R) API",
+    "description": "The label of footer link with label=mimi(R) API linking to https://mimi.readme.io/"
+  },
   "link.item.label.FairyDevices": {
     "message": "FairyDevices",
     "description": "The label of footer link with label=FairyDevices linking to https://fairydevices.jp"

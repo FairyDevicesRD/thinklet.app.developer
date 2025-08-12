@@ -107,6 +107,10 @@ const config = {
                 label: 'App SDK',
                 href: 'https://github.com/FairyDevicesRD/thinklet.app.sdk',
               },
+              {
+                label: 'mimi(R) API',
+                href: 'https://mimi.readme.io/',
+              },
             ],
           },
           {
