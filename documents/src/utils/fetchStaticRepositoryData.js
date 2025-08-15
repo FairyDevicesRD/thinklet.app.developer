@@ -53,7 +53,7 @@ async function fetchStaticRepositoryData() {
 
       allRepos.push(repo);
 
-      // GitHub API レート制限を回避するための遅延
+      // Webスクレイピングレート制限を回避するための遅延
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   }
