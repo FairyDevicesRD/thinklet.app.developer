@@ -37,7 +37,7 @@ export default function HomepageUsages() {
                 <th>🖼️ Preview </th>
               </tr>
             </thead>
-            <tbody>{OwnerList.map((owner) => GhRepository(owner))}</tbody>
+            <tbody>{OwnerList.map((props) => <GhRepository key={props.owner} {...props} />)}</tbody>
           </table>
         </div>
         <div className="container">
