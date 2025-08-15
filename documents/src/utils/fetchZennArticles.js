@@ -65,7 +65,14 @@ function generateLinkCardComponent(articles) {
 }
 
 async function main() {
-  const publicationName = process.argv[2] || "your-publication-name";
+  const publicationName = process.argv[2];
+  if (!publicationName) {
+    console.error("エラー: Zennのpublication名を指定してください。");
+    console.error(
+      "Usage: bun run src/utils/fetchZennArticles.js <publication-name>"
+    );
+    process.exit(1);
+  }
   const outputDir = process.argv[3] || "./src/utils";
 
   console.log(`Zenn Publication "${publicationName}" の記事を取得中...`);
