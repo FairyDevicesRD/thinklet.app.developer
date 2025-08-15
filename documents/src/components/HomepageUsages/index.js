@@ -13,6 +13,7 @@ const OwnerList = [
 ];
 
 export default function HomepageUsages() {
+  const MORE_REPOS_URL = "https://github.com/topics/thinklet";
   return (
     <section className={clsx(styles.usageBanner)}>
       <div className="container">
@@ -39,11 +40,7 @@ export default function HomepageUsages() {
           </table>
         </div>
         <div className="container">
-          <a
-            href="https://github.com/topics/thinklet"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={MORE_REPOS_URL} target="_blank" rel="noopener noreferrer">
             and more...
           </a>
         </div>
