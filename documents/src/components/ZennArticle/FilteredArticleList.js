@@ -7,9 +7,9 @@ import styles from "./ZennLinkCard.module.css";
 
 const FilteredArticleList = () => {
   const articles = zennArticleList();
+  const keywords = ["android", "thinklet", "kotlin"];
   const filteredArticles = articles.filter((article) => {
     const title = article.title.toLowerCase();
-    const keywords = ["android", "thinklet", "kotlin"];
     return keywords.some((keyword) => title.includes(keyword));
   });
   return (
