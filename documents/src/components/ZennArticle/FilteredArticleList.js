@@ -22,7 +22,7 @@ const FilteredArticleList = () => {
       </h3>
       <div className={styles.articleGrid}>
         {filteredArticles.map((article, index) => (
-          <ZennLinkCard key={index} article={article} />
+          <ZennLinkCard key={article.link} article={article} />
         ))}
       </div>
     </section>
