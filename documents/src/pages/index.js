@@ -6,7 +6,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import HomepageUsages from "@site/src/components/HomepageUsages";
-import FilteredArticleList from "../components/ZennArticle/FilteredArticleList";
+import FilteredArticleList from "@site/src/components/ZennArticle/FilteredArticleList";
 
 import styles from "./index.module.css";
 
