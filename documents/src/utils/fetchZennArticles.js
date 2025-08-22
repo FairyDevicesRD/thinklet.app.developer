@@ -65,11 +65,12 @@ function generateLinkCardComponent(articles) {
 }
 
 async function main() {
-  const publicationName = process.argv[2];
+  // 環境変数からpublication名を取得
+  const publicationName = process.env.ZENN_PUBLICATION_NAME;
   if (!publicationName) {
     console.error("エラー: Zennのpublication名を指定してください。");
     console.error(
-      "Usage: bun run src/utils/fetchZennArticles.js <publication-name>"
+      "ZENN_PUBLICATION_NAME=<publication-name> bun run src/utils/fetchZennArticles.js"
     );
     process.exit(1);
   }

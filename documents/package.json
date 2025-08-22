@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "fetch-zenn-articles": "bun run src/utils/fetchZennArticles.js fairydevices",
+    "fetch-zenn-articles": "bun run src/utils/fetchZennArticles.js",
     "start": "docusaurus start",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
