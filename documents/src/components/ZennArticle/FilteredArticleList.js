@@ -1,13 +1,12 @@
 import React from "react";
 import Translate from "@docusaurus/Translate";
 import ZennLinkCard from "./ZennLinkCard";
-import { zennArticleList } from "../../utils/zennArticleList";
-
+import { zennArticleList } from "@site/src/utils/zennArticleList";
+import { keywords } from "@site/src/utils/ZennArticlesKeywords";
 import styles from "./ZennLinkCard.module.css";
 
 const FilteredArticleList = () => {
   const articles = zennArticleList();
-  const keywords = ["android", "thinklet", "kotlin"];
   const filteredArticles = articles.filter((article) => {
     const title = article.title.toLowerCase();
     return keywords.some((keyword) => title.includes(keyword));
