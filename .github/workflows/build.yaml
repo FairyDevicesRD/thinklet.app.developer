@@ -2,6 +2,9 @@ name: Deploy GitHub Pages
 
 on: push
 
+env:
+  ZENN_PUBLICATION_NAME: ${{ vars.ZENN_PUBLICATION_NAME }}
+
 jobs:
   build:
     name: Build
