@@ -15,7 +15,7 @@ const FilteredArticleList = () => {
     <section className={styles.usageBanner}>
       <h3>
         <Translate
-          id="homepage.link.card"
+          id="homepage.blog.card"
           description="Zenn article link card title"
         />
       </h3>

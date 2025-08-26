@@ -11,8 +11,8 @@
     "message": "THINKLETならではのアプリケーションをオープンソースとして公開しています",
     "description": "This homepage usege description"
   },
-  "homepage.link.card": {
+  "homepage.blog.card": {
     "message": "ZennにもTHINKLETアプリケーション関連の記事を掲載しています",
-    "description": "This homepage link card"
+    "description": "This homepage blog card"
   }
 }
