@@ -53,7 +53,7 @@ export default function HomepageUsages() {
 }
 
 function GhRepository({ owner }) {
-  const url = `https://api.github.com/orgs/${owner}/repos`;
+  const url = `https://api.github.com/orgs/${owner}/repos?per_page=100`;
   const cacheKey = `cache_${url}`;
 
   const [repoData, setRepoData] = useState(null);
