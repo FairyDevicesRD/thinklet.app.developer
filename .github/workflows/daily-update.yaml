@@ -1,20 +1,19 @@
-name: Deploy GitHub Pages When Zenn Articles Change
+name: Deploy GitHub Pages When Zenn Articles Or OSS Repository Data Change
 
 on:
-  # schedule:
+  schedule:
   # 毎日9時に実行 (JST)
-  # - cron: '0 0 * * *'
-  workflow_dispatch:
+  - cron: '0 0 * * *'
 
 env:
   ZENN_PUBLICATION_NAME: ${{ vars.ZENN_PUBLICATION_NAME }}
 
 jobs:
-  check-zenn-update-and-deploy:
-    name: Check Zenn Articles Update and Deploy
+  check-zenn-repository-update-and-deploy:
+    name: Check Zenn Articles Or OSS Repository Data Update and Deploy
     runs-on: ubuntu-latest
     outputs:
-      has-changes: ${{ steps.diff-check.outputs.has-changes }}
+      has-changes: ${{ steps.zenn-diff-check.outputs.has-changes || steps.oss-diff-check.outputs.has-changes }}
 
     steps:
       - name: checkout
@@ -36,6 +35,15 @@ jobs:
           restore-keys: |
             zennArticleList-
 
+      - name: Restore previous OSS repository data from cache
+        id: cache-oss-repository
+        uses: actions/cache/restore@v3
+        with:
+          path: ./documents/src/utils/staticRepoData.json
+          key: staticRepoData-${{ github.repository }}
+          restore-keys: |
+            staticRepoData-
+
       - name: Prepare previous Zenn articles data
         run: |
           if [ -f "src/utils/zennArticleList.js" ]; then
@@ -47,69 +55,109 @@ jobs:
           fi
         working-directory: ./documents
 
+      - name: Prepare previous OSS Repository Data
+        run: |
+          if [ -f "src/utils/staticRepoData.json" ]; then
+            echo "Previous OSS Repository Data restored from cache"
+            mv src/utils/staticRepoData.json previous-staticRepoData.json
+          else
+            echo "{}" > previous-staticRepoData.json
+            echo "No previous OSS Repository Data found, created empty JSON file"
+          fi
+        working-directory: ./documents
+
       - name: Fetch Zenn articles
         run: bun run fetch-zenn-articles
         working-directory: ./documents
 
+      - name: Fetch static repository data
+        run: bun run fetch-repository
+        working-directory: ./documents
+
       - name: Check for differences
-        id: diff-check
+        id: zenn-diff-check
         run: |
           if ! cmp -s "src/utils/zennArticleList.js" "previous-zennArticleList.js"; then
             echo "has-changes=true" >> $GITHUB_OUTPUT
-            echo "Zenn articles have changes, deployment needed"
+            echo "Zenn articles have changes"
           else
             echo "has-changes=false" >> $GITHUB_OUTPUT
-            echo "No changes in Zenn articles, skipping deployment"
+            echo "No changes in Zenn articles"
+          fi
+        working-directory: ./documents
+
+      - name: Check for differences
+        id: oss-diff-check
+        run: |
+          if ! cmp -s "src/utils/staticRepoData.json" "previous-staticRepoData.json"; then
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+            echo "OSS Repository Data have changes"
+          else
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            echo "No changes in OSS Repository Data"
           fi
         working-directory: ./documents
 
       - name: Build website
-        if: steps.diff-check.outputs.has-changes == 'true'
+        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
         run: bun run build
         working-directory: ./documents
 
       - uses: actions/upload-pages-artifact@v3
-        if: steps.diff-check.outputs.has-changes == 'true'
+        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
         with:
           path: ./documents/build
 
       - name: Save current Zenn articles data to cache
-        if: steps.diff-check.outputs.has-changes == 'true'
+        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
         uses: actions/cache/save@v3
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}-${{ github.run_id }}
 
-      - name: Update cache key for next run
-        if: steps.diff-check.outputs.has-changes == 'true'
+      - name: Save current OSS Repository Data to cache
+        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: ./documents/src/utils/staticRepoData.json
+          key: staticRepoData-${{ github.repository }}-${{ github.run_id }}
+
+      - name: Update Zenn articles cache key for next run
+        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
         uses: actions/cache/save@v3
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}
 
+      - name: Update OSS Repository Data cache key for next run
+        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
+        uses: actions/cache/save@v3
+        with:
+          path: ./documents/src/utils/staticRepoData.json
+          key: staticRepoData-${{ github.repository }}
+
   deploy:
     name: Deploy
-    needs: [check-zenn-update-and-deploy]
-    if: needs.check-zenn-update-and-deploy.outputs.has-changes == 'true'
+    needs: [check-zenn-repository-update-and-deploy]
+    if: needs.check-zenn-repository-update-and-deploy.outputs.has-changes == 'true'
     permissions:
       pages: write
       id-token: write
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        run: echo "Dry Run Deploying to GitHub Pages!"
-        # uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v4
 
       - name: Notify deployment
-        if: needs.check-zenn-update-and-deploy.outputs.has-changes == 'true'
+        if: needs.check-zenn-repository-update-and-deploy.outputs.has-changes == 'true'
         run: |
-          echo "Static site deployed successfully due to Zenn articles changes"
+          echo "Static site deployed successfully due to Zenn articles or repository data changes"
 
       - name: No changes notification
-        if: needs.check-zenn-update-and-deploy.outputs.has-changes == 'false'
+        if: needs.check-zenn-repository-update-and-deploy.outputs.has-changes == 'false'
         run: |
-          echo "No deployment needed - Zenn articles unchanged"
+          echo "No deployment needed - Zenn articles or repository data unchanged"
