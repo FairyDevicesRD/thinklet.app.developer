@@ -24,6 +24,9 @@ jobs:
       - name: Fetch Zenn articles
         run: bun run fetch-zenn-articles
         working-directory: ./documents
+      - name: Fetch static repository data
+        run: bun run fetch-repository
+        working-directory: ./documents
 
       - name: Build website
         run: bun run build

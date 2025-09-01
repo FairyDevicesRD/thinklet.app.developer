@@ -8,6 +8,7 @@
 .docusaurus
 .cache-loader
 zennArticleList.js
+staticRepoData.json
 
 # Misc
 .DS_Store
