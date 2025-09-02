@@ -48,7 +48,7 @@ class ZennRSSFetcher {
     }));
   }
 
-  async getArticles(limit = 50) {
+  async getArticles(limit) {
     const xmlData = await this.fetchRSS();
     const items = await this.parseRSS(xmlData);
     const articles = this.extractArticleData(items);
@@ -80,7 +80,7 @@ async function main() {
 
   try {
     const fetcher = new ZennRSSFetcher(publicationName);
-    const articles = await fetcher.getArticles(50);
+    const articles = await fetcher.getArticles(100);
 
     console.log(`${articles.length}件の記事を取得しました`);
 
