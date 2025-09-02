@@ -11,6 +11,8 @@
 $ bun install
 # ZennのRSSフィードからpublication内の記事情報を取得します。
 $ ZENN_PUBLICATION_NAME=<publication-name> bun run fetch-zenn-articles
+# THINKLETアプリOSSの情報を取得します。
+$ bun run fetch-repository
 $ bun run start
 ```
 
@@ -19,5 +21,7 @@ $ bun run start
 ```console
 # ZennのRSSフィードからpublication内の記事情報を取得します。
 $ ZENN_PUBLICATION_NAME=<publication-name> bun run fetch-zenn-articles
+# THINKLETアプリOSSの情報を取得します。
+$ bun run fetch-repository
 $ bun run build
 ```
