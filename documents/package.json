@@ -24,8 +24,8 @@
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
     "prism-react-renderer": "^2.4.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "react-loadable": "^5.5.0",
     "html-react-parser": "^5.2.2",
     "node-fetch": "^3.3.2",
@@ -36,9 +36,9 @@
     "@docusaurus/module-type-aliases": "^3.7.0",
     "@docusaurus/types": "^3.7.0",
     "prettier": "^3.5.1",
-    "textlint": "^13.4.1",
-    "textlint-rule-preset-ja-technical-writing": "^8.0.0",
-    "textlint-rule-preset-jtf-style": "^2.3.14",
+    "textlint": "^15.2.2",
+    "textlint-rule-preset-ja-technical-writing": "^12.0.2",
+    "textlint-rule-preset-jtf-style": "^3.0.2",
     "textlint-rule-spellcheck-tech-word": "^5.0.0"
   },
   "browserslist": {
