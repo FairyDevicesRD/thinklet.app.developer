@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
         run: bun install
@@ -28,7 +28,7 @@ jobs:
 
       - name: Restore previous Zenn articles data from cache
         id: cache-zenn
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}
@@ -37,7 +37,7 @@ jobs:
 
       - name: Restore previous OSS repository data from cache
         id: cache-oss-repository
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           path: ./documents/src/utils/staticRepoData.json
           key: staticRepoData-${{ github.repository }}
@@ -103,35 +103,35 @@ jobs:
         run: bun run build
         working-directory: ./documents
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
         with:
           path: ./documents/build
 
       - name: Save current Zenn articles data to cache
         if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}-${{ github.run_id }}
 
       - name: Save current OSS Repository Data to cache
         if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: ./documents/src/utils/staticRepoData.json
           key: staticRepoData-${{ github.repository }}-${{ github.run_id }}
 
       - name: Update Zenn articles cache key for next run
         if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}
 
       - name: Update OSS Repository Data cache key for next run
         if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
-        uses: actions/cache/save@v3
+        uses: actions/cache/save@v4
         with:
           path: ./documents/src/utils/staticRepoData.json
           key: staticRepoData-${{ github.repository }}
