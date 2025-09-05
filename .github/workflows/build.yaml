@@ -1,6 +1,8 @@
 name: Deploy GitHub Pages
 
-on: push
+on:
+  push:
+    branches: [main]
 
 env:
   ZENN_PUBLICATION_NAME: ${{ vars.ZENN_PUBLICATION_NAME }}
