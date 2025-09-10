@@ -5,12 +5,16 @@
   },
   "homepage.usage": {
     "message": "THINKLETを使って何ができますか？",
-    "description": "This homepage usege"
+    "description": "This homepage usage"
   },
   "homepage.usage.description": {
     "message": "THINKLETならではのアプリケーションをオープンソースとして公開しています",
-    "description": "This homepage usege description"
+    "description": "This homepage usage description"
   },
+  "homepage.usage.description.for.partners": {
+  "message": "パートナー企業様の公開アプリの一覧です",
+  "description": "This homepage usage description for partners"
+ }, 
   "homepage.blog.card": {
     "message": "ZennにもTHINKLETアプリケーション関連の記事を掲載しています",
     "description": "This homepage blog card"

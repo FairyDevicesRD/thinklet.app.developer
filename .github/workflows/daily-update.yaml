@@ -7,14 +7,12 @@ on:
 
 env:
   ZENN_PUBLICATION_NAME: ${{ vars.ZENN_PUBLICATION_NAME }}
-
 jobs:
   check-zenn-repository-update-and-deploy:
     name: Check Zenn Articles Or OSS Repository Data Update and Deploy
     runs-on: ubuntu-latest
     outputs:
-      has-changes: ${{ steps.zenn-diff-check.outputs.has-changes || steps.oss-diff-check.outputs.has-changes }}
-
+      has-changes: ${{ steps.has-any-changes.outputs.result }}
     steps:
       - name: checkout
         uses: actions/checkout@v5
@@ -43,6 +41,15 @@ jobs:
           key: staticRepoData-${{ github.repository }}
           restore-keys: |
             staticRepoData-
+      
+      - name: Restore previous Other OSS repository data from cache
+        id: cache-oss-repository-other
+        uses: actions/cache/restore@v4
+        with:
+          path: ./documents/src/utils/staticOtherRepoData.json
+          key: staticOtherRepoData-${{ github.repository }}
+          restore-keys: |
+            staticOtherRepoData-
 
       - name: Prepare previous Zenn articles data
         run: |
@@ -66,13 +73,25 @@ jobs:
           fi
         working-directory: ./documents
 
+      - name: Prepare previous Other OSS Repository Data
+        run: |
+          if [ -f "src/utils/staticOtherRepoData.json" ]; then
+            echo "Previous Other OSS Repository Data restored from cache"
+            mv src/utils/staticOtherRepoData.json previous-staticOtherRepoData.json
+          else
+            echo "{}" > previous-staticOtherRepoData.json
+            echo "No previous Other OSS Repository Data found, created empty JSON file"
+          fi
+        working-directory: ./documents  
+
       - name: Fetch Zenn articles
         run: bun run fetch-zenn-articles
         working-directory: ./documents
 
-      - name: Fetch static repository data
-        run: bun run fetch-repository
-        working-directory: ./documents
+      - name: Set orgs env from JSON
+        run: node src/utils/setOrgsEnv.js >> $GITHUB_ENV
+        working-directory: ./documents  
+
 
       - name: Check for differences
         id: zenn-diff-check
@@ -98,43 +117,80 @@ jobs:
           fi
         working-directory: ./documents
 
+      - name: Check for differences(Other)
+        id: oss-diff-check-other
+        run: |
+          if ! cmp -s "src/utils/staticOtherRepoData.json" "previous-staticOtherRepoData.json"; then
+            echo "has-changes=true" >> $GITHUB_OUTPUT
+            echo "Other OSS Repository Data have changes"
+          else
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            echo "No changes in Other OSS Repository Data"
+          fi
+        working-directory: ./documents
+
+      - name: Check if any changes exist
+        id: has-any-changes
+        run: |
+          if [ "${{ steps.zenn-diff-check.outputs.has-changes }}" == "true" ] || \
+             [ "${{ steps.oss-diff-check.outputs.has-changes }}" == "true" ] || \
+             [ "${{ steps.oss-diff-check-other.outputs.has-changes }}" == "true" ]; then
+            echo "result=true" >> $GITHUB_OUTPUT
+          else
+            echo "result=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build website
-        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
+        if: steps.has-any-changes.outputs.result == 'true'
         run: bun run build
         working-directory: ./documents
 
       - uses: actions/upload-pages-artifact@v4
-        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
+        if: steps.has-any-changes.outputs.result == 'true'
         with:
           path: ./documents/build
 
       - name: Save current Zenn articles data to cache
-        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
+        if: steps.zenn-diff-check.outputs.has-changes == 'true'
         uses: actions/cache/save@v4
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}-${{ github.run_id }}
 
       - name: Save current OSS Repository Data to cache
-        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
+        if: steps.oss-diff-check.outputs.has-changes == 'true'
         uses: actions/cache/save@v4
         with:
           path: ./documents/src/utils/staticRepoData.json
           key: staticRepoData-${{ github.repository }}-${{ github.run_id }}
 
+      - name: Save current Other OSS Repository Data to cache
+        if: steps.oss-diff-check-other.outputs.has-changes == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ./documents/src/utils/staticOtherRepoData.json
+          key: staticOtherRepoData-${{ github.repository }}-${{ github.run_id }}
+
       - name: Update Zenn articles cache key for next run
-        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
+        if: steps.zenn-diff-check.outputs.has-changes == 'true'
         uses: actions/cache/save@v4
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}
 
       - name: Update OSS Repository Data cache key for next run
-        if: steps.zenn-diff-check.outputs.has-changes == 'true' || steps.oss-diff-check.outputs.has-changes == 'true'
+        if: steps.oss-diff-check.outputs.has-changes == 'true'
         uses: actions/cache/save@v4
         with:
           path: ./documents/src/utils/staticRepoData.json
           key: staticRepoData-${{ github.repository }}
+
+      - name: Update Other OSS Repository Data cache key for next run
+        if: steps.oss-diff-check-other.outputs.has-changes == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ./documents/src/utils/staticOtherRepoData.json
+          key: staticOtherRepoData-${{ github.repository }}
 
   deploy:
     name: Deploy
