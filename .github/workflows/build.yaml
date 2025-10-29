@@ -26,8 +26,13 @@ jobs:
       - name: Fetch Zenn articles
         run: bun run fetch-zenn-articles
         working-directory: ./documents
+
+      - name: Set orgs env from JSON
+        run: node src/utils/setOrgsEnv.js >> $GITHUB_ENV
+        working-directory: ./documents
+
       - name: Fetch static repository data
-        run: bun run fetch-repository
+        run: bun run src/utils/fetchStaticRepositoryData.js --selfOrgs ${{ env.REPO_SELF_ORGS }} --otherOrgs ${{ env.REPO_OTHER_ORGS }}
         working-directory: ./documents
 
       - name: Build website

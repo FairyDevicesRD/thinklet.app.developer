@@ -1,14 +1,10 @@
 import clsx from "clsx";
 import Translate from "@docusaurus/Translate";
-import GhRepository from "@site/src/components/GhRepository/GhRepository";
-
+import staticSelfRepoData from "../../utils/staticRepoData.json";
+import staticOtherRepoData from "../../utils/staticOtherRepoData.json";
 import styles from "./styles.module.css";
-
-const OwnerList = [
-  {
-    owner: "FairyDevicesRD",
-  },
-];
+import { selfOrgs, otherOrgs } from "../../constants/orgs";
+import OrgRepositoriesTable from "./OrgRepositoriesTable";
 
 export default function HomepageUsages() {
   const MORE_REPOS_URL = "https://github.com/topics/thinklet";
@@ -25,22 +21,16 @@ export default function HomepageUsages() {
           />
         </h3>
         <div className={clsx(styles.usageTableBox)}>
-          <table className={clsx(styles.usageTable)}>
-            <thead>
-              <tr>
-                <th>ℹ️ Description </th>
-                <th>🔗 URL </th>
-                <th>📅 Last Updated </th>
-                <th>⚖️ LICENSE </th>
-                <th>🖼️ Preview </th>
-              </tr>
-            </thead>
-            <tbody>
-              {OwnerList.map((props) => (
-                <GhRepository key={props.owner} {...props} />
-              ))}
-            </tbody>
-          </table>
+          <OrgRepositoriesTable orgs={selfOrgs} repoData={staticSelfRepoData} />
+        </div>
+        <h3>
+          <Translate
+            id="homepage.usage.description.for.partners"
+            description="homepage usage for partners"
+          />
+        </h3>
+        <div className={clsx(styles.usageTableBox)}>
+          <OrgRepositoriesTable orgs={otherOrgs} repoData={staticOtherRepoData} />
         </div>
         <div className="container">
           <a href={MORE_REPOS_URL} target="_blank" rel="noopener noreferrer">
