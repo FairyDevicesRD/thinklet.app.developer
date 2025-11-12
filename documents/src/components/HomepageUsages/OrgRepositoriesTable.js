@@ -6,13 +6,14 @@ const OrgRepositoriesTable = ({ orgs, repoData }) => {
     repo.topics.includes("thinklet")
   );
 
-  // 配列で与えられた組織の順序でソート、同じ組織内ではリポジトリ名でソート
+  // 配列で与えられた組織の順序でソート、同じ組織内ではLast Push降順でソート
   const sortedRepos = filteredRepos.sort((a, b) => {
     const aIndex = orgs.indexOf(a.owner.login);
     const bIndex = orgs.indexOf(b.owner.login);
     const orgCompare = aIndex - bIndex;
     if (orgCompare !== 0) return orgCompare;
-    return a.name.localeCompare(b.name);
+    // Last Push降順（新しい順）でソート（表示されているpushed_atに合わせる）
+    return (b.pushed_at ? new Date(b.pushed_at).getTime() : 0) - (a.pushed_at ? new Date(a.pushed_at).getTime() : 0);
   });
 
   return (
