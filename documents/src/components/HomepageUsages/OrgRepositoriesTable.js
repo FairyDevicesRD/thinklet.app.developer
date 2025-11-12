@@ -13,7 +13,7 @@ const OrgRepositoriesTable = ({ orgs, repoData }) => {
     const orgCompare = aIndex - bIndex;
     if (orgCompare !== 0) return orgCompare;
     // Last Push降順（新しい順）でソート（表示されているpushed_atに合わせる）
-    return new Date(b.pushed_at) - new Date(a.pushed_at);
+    return (b.pushed_at ? new Date(b.pushed_at).getTime() : 0) - (a.pushed_at ? new Date(a.pushed_at).getTime() : 0);
   });
 
   return (
