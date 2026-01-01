@@ -26,7 +26,7 @@ jobs:
 
       - name: Restore previous Zenn articles data from cache
         id: cache-zenn
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}-
@@ -35,7 +35,7 @@ jobs:
 
       - name: Restore previous OSS repository data from cache
         id: cache-oss-repository
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ./documents/src/utils/staticRepoData.json
           key: staticRepoData-${{ github.repository }}-
@@ -44,7 +44,7 @@ jobs:
 
       - name: Restore previous Other OSS repository data from cache
         id: cache-oss-repository-other
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ./documents/src/utils/staticOtherRepoData.json
           key: staticOtherRepoData-${{ github.repository }}-
@@ -155,21 +155,21 @@ jobs:
 
       - name: Save current Zenn articles data to cache
         if: steps.zenn-diff-check.outputs.has-changes == 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ./documents/src/utils/zennArticleList.js
           key: zennArticleList-${{ github.repository }}-${{ github.run_id }}
 
       - name: Save current OSS Repository Data to cache
         if: steps.oss-diff-check.outputs.has-changes == 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ./documents/src/utils/staticRepoData.json
           key: staticRepoData-${{ github.repository }}-${{ github.run_id }}
 
       - name: Save current Other OSS Repository Data to cache
         if: steps.oss-diff-check-other.outputs.has-changes == 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ./documents/src/utils/staticOtherRepoData.json
           key: staticOtherRepoData-${{ github.repository }}-${{ github.run_id }}
