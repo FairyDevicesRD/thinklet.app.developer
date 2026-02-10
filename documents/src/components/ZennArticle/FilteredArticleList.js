@@ -2,15 +2,10 @@ import React from "react";
 import Translate from "@docusaurus/Translate";
 import ZennLinkCard from "./ZennLinkCard";
 import { zennArticleList } from "@site/src/utils/zennArticleList";
-import { keywords } from "@site/src/utils/ZennArticlesKeywords";
 import styles from "./ZennLinkCard.module.css";
 
 const FilteredArticleList = () => {
   const articles = zennArticleList();
-  const filteredArticles = articles.filter((article) => {
-    const title = article.title.toLowerCase();
-    return keywords.some((keyword) => title.includes(keyword));
-  });
   return (
     <section className={styles.usageBanner}>
       <h3>
@@ -20,7 +15,7 @@ const FilteredArticleList = () => {
         />
       </h3>
       <div className={styles.articleGrid}>
-        {filteredArticles.map((article, index) => (
+        {articles.map((article, index) => (
           <ZennLinkCard key={article.link} article={article} />
         ))}
       </div>
