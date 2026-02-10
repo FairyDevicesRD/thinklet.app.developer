@@ -1,1 +1,3 @@
-export const keywords = ["android", "thinklet", "kotlin"];
+const keywords = ["android", "thinklet", "kotlin"];
+
+module.exports = { keywords };

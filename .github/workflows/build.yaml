@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -23,17 +23,47 @@ jobs:
         run: bun install
         working-directory: ./documents
 
+      - name: Restore Zenn articles cache
+        uses: actions/cache/restore@v5
+        with:
+          path: documents/src/utils/zennArticlesCache.json
+          key: zenn-articles-${{ github.run_id }}
+          restore-keys: |
+            zenn-articles-
+
       - name: Fetch Zenn articles
         run: bun run fetch-zenn-articles
         working-directory: ./documents
+
+      - name: Save Zenn articles cache
+        uses: actions/cache/save@v5
+        if: always()
+        with:
+          path: documents/src/utils/zennArticlesCache.json
+          key: zenn-articles-${{ github.run_id }}
 
       - name: Set orgs env from JSON
         run: node src/utils/setOrgsEnv.js >> $GITHUB_ENV
         working-directory: ./documents
 
+      - name: Restore GitHub repo cache
+        uses: actions/cache/restore@v5
+        with:
+          path: documents/src/utils/githubRepoCache.json
+          key: github-repos-${{ github.run_id }}
+          restore-keys: |
+            github-repos-
+
       - name: Fetch static repository data
         run: bun run src/utils/fetchStaticRepositoryData.js --selfOrgs ${{ env.REPO_SELF_ORGS }} --otherOrgs ${{ env.REPO_OTHER_ORGS }}
         working-directory: ./documents
+
+      - name: Save GitHub repo cache
+        uses: actions/cache/save@v5
+        if: always()
+        with:
+          path: documents/src/utils/githubRepoCache.json
+          key: github-repos-${{ github.run_id }}
 
       - name: Build website
         run: bun run build

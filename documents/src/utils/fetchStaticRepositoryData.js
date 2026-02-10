@@ -4,6 +4,29 @@ const fs = require("fs");
 const path = require("path");
 const minimist = require("minimist");
 
+const CACHE_FILE = path.join(__dirname, "githubRepoCache.json");
+
+function loadCache() {
+  try {
+    if (fs.existsSync(CACHE_FILE)) {
+      const cacheData = fs.readFileSync(CACHE_FILE, "utf-8");
+      return JSON.parse(cacheData);
+    }
+  } catch (error) {
+    console.warn("キャッシュの読み込みに失敗しました:", error.message);
+  }
+  return {};
+}
+
+function saveCache(cache) {
+  try {
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
+    console.log(`キャッシュを保存しました: ${CACHE_FILE}`);
+  } catch (error) {
+    console.error("キャッシュの保存に失敗しました:", error.message);
+  }
+}
+
 async function fetchRepositoriesFromOrg(organization) {
   try {
     const response = await axios.get(
@@ -58,35 +81,45 @@ async function fetchStaticRepositoryData(selfOrgs, otherOrgs) {
   console.log("Fetching repositories for self organizations:", selfOrgs);
   console.log("Fetching repositories for other organizations:", otherOrgs);
 
+  const cache = loadCache();
   let selfRepos = [];
   let otherRepos = [];
 
-  // 自社組織
-  for (const org of selfOrgs) {
-    const repos = await fetchRepositoriesFromOrg(org);
-    // OG画像を取得して追加
-    for (const repo of repos) {
-      console.log(`Fetching OG image for ${repo.full_name}...`);
-      const ogImage = await fetchOgImageForRepo(repo.full_name);
-      repo.ogImage = ogImage;
-      selfRepos.push(repo);
-      // Webスクレイピングレート制限を回避するための遅延
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+  async function processRepo(repo) {
+    const cacheKey = repo.full_name;
+    const cachedData = cache[cacheKey];
+
+    if (cachedData && cachedData.updated_at === repo.updated_at) {
+      console.log(`キャッシュを使用: ${repo.full_name}`);
+      return { ...repo, ogImage: cachedData.ogImage };
+    }
+
+    console.log(`OG画像を取得中: ${repo.full_name}`);
+    const ogImage = await fetchOgImageForRepo(repo.full_name);
+
+    cache[cacheKey] = {
+      updated_at: repo.updated_at,
+      ogImage: ogImage,
+    };
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return { ...repo, ogImage: ogImage };
+  }
+
+  async function processOrgList(orgsList, targetArray) {
+    for (const org of orgsList) {
+      const repos = await fetchRepositoriesFromOrg(org);
+      for (const repo of repos) {
+        const processedRepo = await processRepo(repo);
+        targetArray.push(processedRepo);
+      }
     }
   }
-  // 他社組織
-  for (const org of otherOrgs) {
-    const repos = await fetchRepositoriesFromOrg(org);
-    // OG画像を取得して追加
-    for (const repo of repos) {
-      console.log(`Fetching OG image for ${repo.full_name}...`);
-      const ogImage = await fetchOgImageForRepo(repo.full_name);
-      repo.ogImage = ogImage;
-      otherRepos.push(repo);
-      // Webスクレイピングレート制限を回避するための遅延
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    }
-  }
+
+  await processOrgList(selfOrgs, selfRepos);
+  await processOrgList(otherOrgs, otherRepos);
+
+  saveCache(cache);
   
   const dataDir = path.join(__dirname, "../utils");
   if (!fs.existsSync(dataDir)) {
