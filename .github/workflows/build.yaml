@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -24,7 +24,7 @@ jobs:
         working-directory: ./documents
 
       - name: Restore Zenn articles cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: documents/src/utils/zennArticlesCache.json
           key: zenn-articles-${{ github.run_id }}
@@ -36,7 +36,7 @@ jobs:
         working-directory: ./documents
 
       - name: Save Zenn articles cache
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         if: always()
         with:
           path: documents/src/utils/zennArticlesCache.json
@@ -47,7 +47,7 @@ jobs:
         working-directory: ./documents
 
       - name: Restore GitHub repo cache
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: documents/src/utils/githubRepoCache.json
           key: github-repos-${{ github.run_id }}
@@ -59,7 +59,7 @@ jobs:
         working-directory: ./documents
 
       - name: Save GitHub repo cache
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         if: always()
         with:
           path: documents/src/utils/githubRepoCache.json
