@@ -1,6 +1,6 @@
 // @ts-check
 import { themes as prismThemes } from 'prism-react-renderer';
-const { selfOrgs, otherOrgs } = require('./src/constants/orgs');
+const { selfAccounts, otherAccounts } = require('./src/constants/accounts');
   
 /** @type {import('@docusaurus/types').Config} */
 const config = {

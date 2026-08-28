@@ -3,8 +3,8 @@ import Translate from "@docusaurus/Translate";
 import staticSelfRepoData from "../../utils/staticRepoData.json";
 import staticOtherRepoData from "../../utils/staticOtherRepoData.json";
 import styles from "./styles.module.css";
-import { selfOrgs, otherOrgs } from "../../constants/orgs";
-import OrgRepositoriesTable from "./OrgRepositoriesTable";
+import { selfAccounts, otherAccounts } from "../../constants/accounts";
+import AccountRepositoriesTable from "./AccountRepositoriesTable";
 
 export default function HomepageUsages() {
   const MORE_REPOS_URL = "https://github.com/topics/thinklet";
@@ -21,7 +21,7 @@ export default function HomepageUsages() {
           />
         </h3>
         <div className={clsx(styles.usageTableBox)}>
-          <OrgRepositoriesTable orgs={selfOrgs} repoData={staticSelfRepoData} />
+          <AccountRepositoriesTable accounts={selfAccounts} repoData={staticSelfRepoData} />
         </div>
         <h3>
           <Translate
@@ -30,7 +30,7 @@ export default function HomepageUsages() {
           />
         </h3>
         <div className={clsx(styles.usageTableBox)}>
-          <OrgRepositoriesTable orgs={otherOrgs} repoData={staticOtherRepoData} />
+          <AccountRepositoriesTable accounts={otherAccounts} repoData={staticOtherRepoData} />
         </div>
         <div className="container">
           <a href={MORE_REPOS_URL} target="_blank" rel="noopener noreferrer">

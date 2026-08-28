@@ -27,18 +27,24 @@ function saveCache(cache) {
   }
 }
 
-async function fetchRepositoriesFromOrg(organization) {
+async function fetchRepositoriesFromAccount(accountName) {
   try {
-    const response = await axios.get(
-      `https://api.github.com/orgs/${organization}/repos?per_page=100`
+    const { data: accountInfo } = await axios.get(
+      `https://api.github.com/users/${accountName}`
     );
+    const reposUrl =
+      accountInfo.type === "Organization"
+        ? `https://api.github.com/orgs/${accountName}/repos?per_page=100`
+        : `https://api.github.com/users/${accountName}/repos?per_page=100`;
+
+    const response = await axios.get(reposUrl);
 
     return response.data.filter(
       (repo) => repo.topics && repo.topics.includes("thinklet")
     );
   } catch (error) {
     console.error(
-      `Failed to fetch repositories for ${organization}:`,
+      `Failed to fetch repositories for ${accountName}:`,
       error.message
     );
     return [];
@@ -64,22 +70,22 @@ async function fetchOgImageForRepo(repoFullName) {
 // --- 引数パース ---
 const argv = minimist(process.argv.slice(2), {
   string: [
-    "selfOrgs",
-    "otherOrgs",
+    "selfAccounts",
+    "otherAccounts",
   ],
   default: {
-    selfOrgs: "FairyDevicesRD",
-    otherOrgs: "",
+    selfAccounts: "FairyDevicesRD",
+    otherAccounts: "",
   }
 });
 
-const selfOrgs = argv.selfOrgs ? argv.selfOrgs.split(",") : [];
-const otherOrgs = argv.otherOrgs ? argv.otherOrgs.split(",") : [];
+const selfAccounts = argv.selfAccounts ? argv.selfAccounts.split(",") : [];
+const otherAccounts = argv.otherAccounts ? argv.otherAccounts.split(",") : [];
 
-async function fetchStaticRepositoryData(selfOrgs, otherOrgs) {
+async function fetchStaticRepositoryData(selfAccounts, otherAccounts) {
 
-  console.log("Fetching repositories for self organizations:", selfOrgs);
-  console.log("Fetching repositories for other organizations:", otherOrgs);
+  console.log("Fetching repositories for self accounts:", selfAccounts);
+  console.log("Fetching repositories for other accounts:", otherAccounts);
 
   const cache = loadCache();
   let selfRepos = [];
@@ -106,9 +112,9 @@ async function fetchStaticRepositoryData(selfOrgs, otherOrgs) {
     return { ...repo, ogImage: ogImage };
   }
 
-  async function processOrgList(orgsList, targetArray) {
-    for (const org of orgsList) {
-      const repos = await fetchRepositoriesFromOrg(org);
+  async function processAccountList(accountsList, targetArray) {
+    for (const account of accountsList) {
+      const repos = await fetchRepositoriesFromAccount(account);
       for (const repo of repos) {
         const processedRepo = await processRepo(repo);
         targetArray.push(processedRepo);
@@ -116,8 +122,8 @@ async function fetchStaticRepositoryData(selfOrgs, otherOrgs) {
     }
   }
 
-  await processOrgList(selfOrgs, selfRepos);
-  await processOrgList(otherOrgs, otherRepos);
+  await processAccountList(selfAccounts, selfRepos);
+  await processAccountList(otherAccounts, otherRepos);
 
   saveCache(cache);
   
@@ -140,7 +146,7 @@ async function fetchStaticRepositoryData(selfOrgs, otherOrgs) {
   }
 }
 
-fetchStaticRepositoryData(selfOrgs, otherOrgs).catch((error) => {
+fetchStaticRepositoryData(selfAccounts, otherAccounts).catch((error) => {
   console.error("Error in staticRepoData:", error);
   process.exit(1);
 });
