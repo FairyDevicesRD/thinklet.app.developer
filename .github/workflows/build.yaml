@@ -42,7 +42,7 @@ jobs:
           path: documents/src/utils/zennArticlesCache.json
           key: zenn-articles-${{ github.run_id }}
 
-      - name: Set accounts env from JSON
+      - name: Set accounts env from constants
         run: node src/utils/setAccountsEnv.js >> $GITHUB_ENV
         working-directory: ./documents
 

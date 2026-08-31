@@ -88,7 +88,7 @@ jobs:
         run: bun run fetch-zenn-articles
         working-directory: ./documents
 
-      - name: Set accounts env from JSON
+      - name: Set accounts env from constants
         run: node src/utils/setAccountsEnv.js >> $GITHUB_ENV
         working-directory: ./documents
 
