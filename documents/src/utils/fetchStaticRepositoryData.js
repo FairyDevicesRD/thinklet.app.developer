@@ -79,9 +79,14 @@ const argv = minimist(process.argv.slice(2), {
   }
 });
 
-if (argv.selfOrgs !== undefined || argv.otherOrgs !== undefined) {
+const ALLOWED_OPTIONS = ["selfAccounts", "otherAccounts"];
+const unknownOptions = Object.keys(argv).filter(
+  (key) => key !== "_" && !ALLOWED_OPTIONS.includes(key)
+);
+if (unknownOptions.length > 0) {
   console.error(
-    "エラー: --selfOrgs/--otherOrgs は --selfAccounts/--otherAccounts に名称変更されました。新しいオプション名を使用してください。"
+    `エラー: 未知のオプションが指定されました: ${unknownOptions.map((o) => `--${o}`).join(", ")}\n` +
+    "使用可能なオプション: --selfAccounts, --otherAccounts"
   );
   process.exit(1);
 }
@@ -90,6 +95,13 @@ const parseAccountList = (v) =>
   typeof v === "string" ? v.split(",").map((s) => s.trim()).filter(Boolean) : [];
 const selfAccounts = parseAccountList(argv.selfAccounts);
 const otherAccounts = parseAccountList(argv.otherAccounts);
+
+if (selfAccounts.length === 0) {
+  console.warn("警告: selfAccountsが空です。自社アカウントのリポジトリは取得されません。");
+}
+if (otherAccounts.length === 0) {
+  console.warn("警告: otherAccountsが空です。他社/個人アカウントのリポジトリは取得されません。");
+}
 
 async function fetchStaticRepositoryData(selfAccounts, otherAccounts) {
 
