@@ -3,8 +3,10 @@ import Translate from "@docusaurus/Translate";
 import staticSelfRepoData from "../../utils/staticRepoData.json";
 import staticOtherRepoData from "../../utils/staticOtherRepoData.json";
 import styles from "./styles.module.css";
-import { selfAccounts, otherAccounts } from "../../constants/accounts";
+import accounts from "../../constants/accounts";
 import AccountRepositoriesTable from "./AccountRepositoriesTable";
+
+const { selfAccounts, otherAccounts } = accounts;
 
 export default function HomepageUsages() {
   const MORE_REPOS_URL = "https://github.com/topics/thinklet";
