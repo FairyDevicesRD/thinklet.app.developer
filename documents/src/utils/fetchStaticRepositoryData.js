@@ -79,6 +79,13 @@ const argv = minimist(process.argv.slice(2), {
   }
 });
 
+if (argv.selfOrgs !== undefined || argv.otherOrgs !== undefined) {
+  console.error(
+    "エラー: --selfOrgs/--otherOrgs は --selfAccounts/--otherAccounts に名称変更されました。新しいオプション名を使用してください。"
+  );
+  process.exit(1);
+}
+
 const parseAccountList = (v) =>
   typeof v === "string" ? v.split(",").map((s) => s.trim()).filter(Boolean) : [];
 const selfAccounts = parseAccountList(argv.selfAccounts);
