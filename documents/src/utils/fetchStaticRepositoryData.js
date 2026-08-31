@@ -79,8 +79,10 @@ const argv = minimist(process.argv.slice(2), {
   }
 });
 
-const selfAccounts = argv.selfAccounts ? argv.selfAccounts.split(",") : [];
-const otherAccounts = argv.otherAccounts ? argv.otherAccounts.split(",") : [];
+const parseAccountList = (v) =>
+  typeof v === "string" ? v.split(",").map((s) => s.trim()).filter(Boolean) : [];
+const selfAccounts = parseAccountList(argv.selfAccounts);
+const otherAccounts = parseAccountList(argv.otherAccounts);
 
 async function fetchStaticRepositoryData(selfAccounts, otherAccounts) {
 
