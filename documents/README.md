@@ -12,8 +12,8 @@ $ bun install
 # ZennのRSSフィードからpublication内の記事情報を取得します。
 $ ZENN_PUBLICATION_NAME=<publication-name> bun run fetch-zenn-articles
 # THINKLETアプリOSSの情報を取得します。
-# selfOrgs: 自社組織 otherOrgs: パートナー組織(カンマ区切りで複数指定)
-$ bun run fetch-repository --selfOrgs FairyDevicesRD --otherOrgs playbox-dev,function-transportation
+# selfAccounts: 自社組織 otherAccounts: パートナー組織・個人アカウント(カンマ区切りで複数指定)
+$ bun run fetch-repository --selfAccounts FairyDevicesRD --otherAccounts playbox-dev,function-transportation,tokoroten
 $ bun run start
 ```
 
@@ -23,7 +23,7 @@ $ bun run start
 # ZennのRSSフィードからpublication内の記事情報を取得します。
 $ ZENN_PUBLICATION_NAME=<publication-name> bun run fetch-zenn-articles
 # THINKLETアプリOSSの情報を取得します。
-# selfOrgs: 自社組織 otherOrgs: パートナー組織(カンマ区切りで複数指定)
-$ bun run fetch-repository --selfOrgs FairyDevicesRD --otherOrgs playbox-dev,function-transportation
+# selfAccounts: 自社組織 otherAccounts: パートナー組織・個人アカウント(カンマ区切りで複数指定)
+$ bun run fetch-repository --selfAccounts FairyDevicesRD --otherAccounts playbox-dev,function-transportation,tokoroten
 $ bun run build
 ```
