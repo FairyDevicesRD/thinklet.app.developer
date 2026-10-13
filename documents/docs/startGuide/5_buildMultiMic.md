@@ -20,9 +20,11 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
 
 | 1ch取得時 | 2ch取得時 |
 | :----------: | :----------: |
-| <img src={require('./img/hw/lc-01/mic/1ch.png').default} style={{ width: '700px'}} /> | <img src={require('./img/hw/lc-01/mic/2ch.png').default} style={{ width: '700px'}} /> |
-| **5ch取得時** | **6ch取得時** |
-| <img src={require('./img/hw/lc-01/mic/5ch.png').default} style={{ width: '700px'}} /> | <img src={require('./img/hw/lc-01/mic/6ch.png').default} style={{ width: '700px'}} /> |
+| <img src={require('./img/hw/lc-01/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。右腕上部のマイクのみが1chとして使用される。" style={{ width: '700px'}} /> | <img src={require('./img/hw/lc-01/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch。" style={{ width: '700px'}} /> |
+
+| 5ch取得時 | 6ch取得時 |
+| :----------: | :----------: |
+| <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が4ch、右腕下部が5ch。左腕上部はマイクではないダミー穴。" style={{ width: '700px'}} /> | <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が5ch、右腕下部が6ch。4chは物理マイクのないループバック。左腕上部はマイクではないダミー穴。" style={{ width: '700px'}} /> |
 
 :::info[補足]
 - 写真の「×」は、マイクではない「ダミー穴」です。
