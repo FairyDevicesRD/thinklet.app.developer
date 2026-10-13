@@ -15,19 +15,28 @@ THINKLET固有の機能を用いて、簡単な録音アプリを作ってみま
 完成品は、<SampleMultiAudioRecorderRoot /> にあります。
 
 ## マイクのチャンネル配置
-- THINKLETには5つのマイクが内蔵されています。
-- 取得するチャンネル数によって、どの物理マイクが何chに割り当てられるかが異なります。
+THINKLET・THINKLET cubeとも、5つのマイクが内蔵されています。取得するチャンネル数によって、どの物理マイクが何chに割り当てられるかが異なります。丸の中の数字は、その穴がそのチャンネル数で録音したときの何chに対応するかを表しています。
+
+### THINKLET
 
 | 1ch取得時 | 2ch取得時 |
 | :----------: | :----------: |
-| <img src={require('./img/hw/lc-01/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。右腕上部のマイクのみが1chとして使用される。" style={{ width: '700px'}} /> | <img src={require('./img/hw/lc-01/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch。" style={{ width: '700px'}} /> |
+| <img src={require('./img/hw/lc-01/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。右腕下部のマイクのみが1chとして使用される。" style={{ width: '900px'}} /> | <img src={require('./img/hw/lc-01/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。右腕下部が1ch、左腕下部が2ch。" style={{ width: '900px'}} /> |
 
 | 5ch取得時 | 6ch取得時 |
 | :----------: | :----------: |
-| <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が4ch、右腕下部が5ch。左腕上部はマイクではないダミー穴。" style={{ width: '700px'}} /> | <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が5ch、右腕下部が6ch。4chは物理マイクのないループバック。左腕上部はマイクではないダミー穴。" style={{ width: '700px'}} /> |
+| <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が4ch、右腕下部が5ch。左腕上部はマイクではないダミー穴。" style={{ width: '900px'}} /> | <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が5ch、右腕下部が6ch。4chは物理マイクのないループバック。左腕上部はマイクではないダミー穴。" style={{ width: '900px'}} /> |
+
+### THINKLET cube
+
+<img
+  src={require('./img/hw/lc-02/mic/channels.png').default}
+  alt="THINKLET cubeのマイク穴配置図。カメラ上部に3つ、カメラ左側に2つの穴があり、1ch/2ch/5ch/6ch取得時それぞれのチャンネル番号を示す。"
+  style={{ width: '900px'}}
+/>
 
 :::info[補足]
-- 写真の「×」は、マイクではない「ダミー穴」です。
+- THINKLETの写真の「×」は、マイクではない「ダミー穴」です。
 - 6ch取得時の4chはループバックで、物理的なマイクには対応しません。
 :::
 
