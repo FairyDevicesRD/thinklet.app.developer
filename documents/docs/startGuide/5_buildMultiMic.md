@@ -13,6 +13,22 @@ import {SampleMultiAudioRecorderRoot, FiveChannelRecorder} from '../_links.js'
 # マルチマイクで録音するアプリをつくってみる
 THINKLET固有の機能を用いて、簡単な録音アプリを作ってみましょう。  
 完成品は、<SampleMultiAudioRecorderRoot /> にあります。
+
+## マイクのチャンネル配置
+- THINKLETには5つのマイクが内蔵されています。
+- 取得するチャンネル数によって、どの物理マイクが何chに割り当てられるかが異なります。
+
+| 1ch取得時 | 2ch取得時 |
+| :----------: | :----------: |
+| <img src={require('./img/hw/lc-01/mic/1ch.png').default} style={{ width: '700px'}} /> | <img src={require('./img/hw/lc-01/mic/2ch.png').default} style={{ width: '700px'}} /> |
+| **5ch取得時** | **6ch取得時** |
+| <img src={require('./img/hw/lc-01/mic/5ch.png').default} style={{ width: '700px'}} /> | <img src={require('./img/hw/lc-01/mic/6ch.png').default} style={{ width: '700px'}} /> |
+
+:::info[補足]
+- 写真の「×」は、マイクではない「ダミー穴」です。
+- 6ch取得時の4chはループバックで、物理的なマイクには対応しません。
+:::
+
 ## 新規アプリの作成
 - Android Studioから新しいプロジェクトを作りましょう。前項の録画アプリと手順は同じです。
 - アクティビティのテンプレートは、`Phone and Tablet` → `Empty Activity` で作成、パッケージ名は任意です。本ドキュメントでは、`com.example.fd.multichannelaudiorecorder` としています。
