@@ -14,32 +14,6 @@ import {SampleMultiAudioRecorderRoot, FiveChannelRecorder} from '../_links.js'
 THINKLET固有の機能を用いて、簡単な録音アプリを作ってみましょう。  
 完成品は、<SampleMultiAudioRecorderRoot /> にあります。
 
-## マイクのチャンネル配置
-THINKLET・THINKLET cubeには5つのマイクが内蔵されています。取得するチャンネル数によって、各マイクが何ch目に対応するかが異なります。丸の中の数字がチャンネル番号を示します。
-
-### THINKLET
-
-| 1ch取得時 | 2ch取得時 |
-| :----------: | :----------: |
-| <img src={require('./img/hw/lc-01/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。右腕下部のマイクのみが1chとして使用される。" style={{ width: '900px'}} /> | <img src={require('./img/hw/lc-01/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。右腕下部が1ch、左腕下部が2ch。" style={{ width: '900px'}} /> |
-
-| 5ch取得時 | 6ch取得時 |
-| :----------: | :----------: |
-| <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が4ch、右腕下部が5ch。左腕上部はマイクではないダミー穴。" style={{ width: '900px'}} /> | <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が5ch、右腕下部が6ch。4chは物理マイクのないループバック。左腕上部はマイクではないダミー穴。" style={{ width: '900px'}} /> |
-
-### THINKLET cube
-
-<img
-  src={require('./img/hw/lc-02/mic/channels.png').default}
-  alt="THINKLET cubeのマイク穴配置図。カメラ上部に3つ、カメラ左側に2つの穴があり、1ch/2ch/5ch/6ch取得時それぞれのチャンネル番号を示す。"
-  style={{ width: '900px'}}
-/>
-
-:::info[補足]
-- THINKLETの写真の「×」は、マイクではない「ダミー穴」です。
-- 6ch取得時の4chはループバックで、物理的なマイクには対応しません。
-:::
-
 ## 新規アプリの作成
 - Android Studioから新しいプロジェクトを作りましょう。前項の録画アプリと手順は同じです。
 - アクティビティのテンプレートは、`Phone and Tablet` → `Empty Activity` で作成、パッケージ名は任意です。本ドキュメントでは、`com.example.fd.multichannelaudiorecorder` としています。
@@ -239,3 +213,29 @@ rawファイルが生成されていれば、録音できています。
     src={require('./img/audacity/3.jpg').default}
     style={{ width: '500px', margin: '20px'}}
   />
+
+## マイクのチャンネル配置
+THINKLET・THINKLET cubeには5つのマイクが内蔵されています。取得するチャンネル数によって、各マイクが何ch目に対応するかが異なります。丸の中の数字がチャンネル番号を示します。
+
+### THINKLET
+
+| 1ch取得時 | 2ch取得時 |
+| :----------: | :----------: |
+| <img src={require('./img/hw/lc-01/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。右腕下部のマイクのみが1chとして使用される。" style={{ width: '900px'}} /> | <img src={require('./img/hw/lc-01/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。右腕下部が1ch、左腕下部が2ch。" style={{ width: '900px'}} /> |
+
+| 5ch取得時 | 6ch取得時 |
+| :----------: | :----------: |
+| <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が4ch、右腕下部が5ch。左腕上部はマイクではないダミー穴。" style={{ width: '900px'}} /> | <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。右腕上部が1ch、左腕下部が2ch、左腕中央が3ch、右腕中央が5ch、右腕下部が6ch。4chは物理マイクのないループバック。左腕上部はマイクではないダミー穴。" style={{ width: '900px'}} /> |
+
+### THINKLET cube
+
+<img
+  src={require('./img/hw/lc-02/mic/channels.png').default}
+  alt="THINKLET cubeのマイク穴配置図。カメラ上部に3つ、カメラ左側に2つの穴があり、1ch/2ch/5ch/6ch取得時それぞれのチャンネル番号を示す。"
+  style={{ width: '900px'}}
+/>
+
+:::info[補足]
+- THINKLETの写真の「×」は、マイクではない「ダミー穴」です。
+- 6ch取得時の4chはループバックで、物理的なマイクには対応しません。
+:::
