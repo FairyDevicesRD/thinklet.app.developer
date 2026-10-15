@@ -219,21 +219,27 @@ Audacityで取り込んだ各チャンネルの波形が、どのマイクに対
 
 ### THINKLET
 
-| 1ch取得時 | 2ch取得時 |
-| :----------: | :----------: |
-| <img src={require('./img/hw/lc-01/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。画像向かって右側下部のマイクのみが1chとして使用される。" style={{ width: '900px'}} /> | <img src={require('./img/hw/lc-01/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。画像向かって右側下部が1ch、左側下部が2ch。" style={{ width: '900px'}} /> |
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+  <img src={require('./img/hw/lc-01/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。画像向かって右側下部のマイクのみが1chとして使用される。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-01/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。画像向かって右側下部が1ch、左側下部が2ch。" style={{ flex: 1, minWidth: 0 }} />
+</div>
 
-| 5ch取得時 | 6ch取得時 |
-| :----------: | :----------: |
-| <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が4ch、右側下部が5ch。左側上部はマイクではないダミー穴。" style={{ width: '900px'}} /> | <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が5ch、右側下部が6ch。4chは物理マイクのないループバック音で、左側上部はマイクではないダミー穴。" style={{ width: '900px'}} /> |
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+  <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が4ch、右側下部が5ch。左側上部はマイクではないダミー穴。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が5ch、右側下部が6ch。4chは物理マイクのないループバック音で、左側上部はマイクではないダミー穴。" style={{ flex: 1, minWidth: 0 }} />
+</div>
 
 ### THINKLET cube
 
-<img
-  src={require('./img/hw/lc-02/mic/channels.png').default}
-  alt="THINKLET cubeのマイク穴配置図。カメラ上部に3つ、カメラ左側に2つの穴があり、1ch/2ch/5ch/6ch取得時それぞれのチャンネル番号を示す。"
-  style={{ width: '900px'}}
-/>
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+  <img src={require('./img/hw/lc-02/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。画像向かって上部右寄りの穴のみが1chとして使用される。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-02/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。画像向かって上部右寄りの穴が1ch、左側下部の穴が2ch。" style={{ flex: 1, minWidth: 0 }} />
+</div>
+
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+  <img src={require('./img/hw/lc-02/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。画像向かって上部左寄りが1ch、上部中央が4ch、上部右寄りが5ch、左側上部が3ch、左側下部が2ch。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-02/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって上部左寄りが1ch、上部中央が5ch、上部右寄りが6ch、左側上部が3ch、左側下部が2ch。4chは物理マイクのないループバック音。" style={{ flex: 1, minWidth: 0 }} />
+</div>
 
 :::info[補足]
 - THINKLETの写真の「×」は、マイクではない「ダミー穴」です。
