@@ -226,7 +226,7 @@ Audacityで取り込んだ各チャンネルの波形が、どのマイクに対
 
 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
   <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が4ch、右側下部が5ch。左側上部はマイクではないダミー穴。" style={{ flex: 1, minWidth: 0 }} />
-  <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が5ch、右側下部が6ch。4chは物理マイクのないループバック音で、左側上部はマイクではないダミー穴。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が5ch、右側下部が6ch。4chは物理マイクに対応しないループバック音用のチャンネル（本ガイドの方法では無音）。左側上部はマイクではないダミー穴。" style={{ flex: 1, minWidth: 0 }} />
 </div>
 
 ### THINKLET cube
@@ -238,10 +238,11 @@ Audacityで取り込んだ各チャンネルの波形が、どのマイクに対
 
 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
   <img src={require('./img/hw/lc-02/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。画像向かって上部左寄りが1ch、上部中央が4ch、上部右寄りが5ch、左側上部が3ch、左側下部が2ch。" style={{ flex: 1, minWidth: 0 }} />
-  <img src={require('./img/hw/lc-02/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって上部左寄りが1ch、上部中央が5ch、上部右寄りが6ch、左側上部が3ch、左側下部が2ch。4chは物理マイクのないループバック音。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-02/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって上部左寄りが1ch、上部中央が5ch、上部右寄りが6ch、左側上部が3ch、左側下部が2ch。4chは物理マイクに対応しないループバック音用のチャンネル（本ガイドの方法では無音）。" style={{ flex: 1, minWidth: 0 }} />
 </div>
 
 :::info[備考]
 - THINKLETの写真の「×」は、マイクではない「ダミー穴」です。
-- 6ch取得時の4chはループバック音(スピーカーから出力されている音の原音)で、物理的なマイクには対応しません。
+- 6ch取得時の4chは、ループバック音（端末が再生している音）用のチャンネルで、物理的なマイクには対応しません。
+  - ループバック音が入るのは、AudioSourceに`VOICE_COMMUNICATION`を指定して録音した場合のみです。本ガイドで使用しているSDK（`RawAudioRecordWrapper`）ではAudioSourceを指定できないため、本ガイドの方法では4chは無音になります。
 :::
