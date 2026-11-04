@@ -13,6 +13,7 @@ import {SampleMultiAudioRecorderRoot, FiveChannelRecorder} from '../_links.js'
 # マルチマイクで録音するアプリをつくってみる
 THINKLET固有の機能を用いて、簡単な録音アプリを作ってみましょう。  
 完成品は、<SampleMultiAudioRecorderRoot /> にあります。
+
 ## 新規アプリの作成
 - Android Studioから新しいプロジェクトを作りましょう。前項の録画アプリと手順は同じです。
 - アクティビティのテンプレートは、`Phone and Tablet` → `Empty Activity` で作成、パッケージ名は任意です。本ドキュメントでは、`com.example.fd.multichannelaudiorecorder` としています。
@@ -212,3 +213,36 @@ rawファイルが生成されていれば、録音できています。
     src={require('./img/audacity/3.jpg').default}
     style={{ width: '500px', margin: '20px'}}
   />
+
+## マイクのチャンネル配置
+Audacityで取り込んだ各チャンネルの波形が、どのマイクに対応しているか分かるように説明します。THINKLET・THINKLET cubeには5つのマイクが内蔵されています。取得するチャンネル数によって、各マイクが何ch目に対応するかが異なります。丸の中の数字がチャンネル番号を示します。
+
+### THINKLET
+
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+  <img src={require('./img/hw/lc-01/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。画像向かって右側下部のマイクのみが1chとして使用される。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-01/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。画像向かって右側下部が1ch、左側下部が2ch。" style={{ flex: 1, minWidth: 0 }} />
+</div>
+
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+  <img src={require('./img/hw/lc-01/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が4ch、右側下部が5ch。左側上部はマイクではないダミー穴。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-01/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって右側上部が1ch、左側下部が2ch、左側中央が3ch、右側中央が5ch、右側下部が6ch。4chは物理マイクに対応しないループバック音用のチャンネル（本ガイドの方法では無音）。左側上部はマイクではないダミー穴。" style={{ flex: 1, minWidth: 0 }} />
+</div>
+
+### THINKLET cube
+
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+  <img src={require('./img/hw/lc-02/mic/1ch.png').default} alt="1ch取得時のマイクチャンネル配置図。画像向かって上部右寄りの穴のみが1chとして使用される。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-02/mic/2ch.png').default} alt="2ch取得時のマイクチャンネル配置図。画像向かって上部右寄りの穴が1ch、左側下部の穴が2ch。" style={{ flex: 1, minWidth: 0 }} />
+</div>
+
+<div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginBottom: '8px' }}>
+  <img src={require('./img/hw/lc-02/mic/5ch.png').default} alt="5ch取得時のマイクチャンネル配置図。画像向かって上部左寄りが1ch、上部中央が4ch、上部右寄りが5ch、左側上部が3ch、左側下部が2ch。" style={{ flex: 1, minWidth: 0 }} />
+  <img src={require('./img/hw/lc-02/mic/6ch.png').default} alt="6ch取得時のマイクチャンネル配置図。画像向かって上部左寄りが1ch、上部中央が5ch、上部右寄りが6ch、左側上部が3ch、左側下部が2ch。4chは物理マイクに対応しないループバック音用のチャンネル（本ガイドの方法では無音）。" style={{ flex: 1, minWidth: 0 }} />
+</div>
+
+:::info[備考]
+- THINKLETの写真の「×」は、マイクではない「ダミー穴」です。
+- 6ch取得時の4chは、ループバック音（端末が再生している音）用のチャンネルで、物理的なマイクには対応しません。
+  - ループバック音が入るのは、AudioSourceに`VOICE_COMMUNICATION`を指定して録音した場合のみです。本ガイドで使用しているSDK（`RawAudioRecordWrapper`）ではAudioSourceを指定できないため、本ガイドの方法では4chは無音になります。
+:::
